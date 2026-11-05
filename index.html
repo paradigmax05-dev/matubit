@@ -2,1048 +2,839 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="MATUBIT — Laboratorio independiente de investigación científica, matemática y computacional.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATUBIT — Computational Research</title>
+  <meta name="description" content="Independent research in mathematics, cognition and complex systems.">
 
-<title>MATUBIT — Entre simulaciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- TAILWIND -->
-<script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- TYPOGRAPHY -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #17191d;
+      --muted: #777c83;
+      --line: #e5e6e8;
+      --blue: #315d91;
+      --cyan: #63b7c5;
+      --dark: #111820;
+      --soft: #f6f7f7;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Source Sans 3", sans-serif;
+      --mono: "IBM Plex Mono", monospace;
+    }
 
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        accent: '#315D91',
-        ink: '#151515',
-        paper: '#FFFFFF',
-        muted: '#737373',
-        line: '#E5E5E5'
-      },
-      fontFamily: {
-        editorial: ['Playfair Display', 'serif'],
-        sans: ['Inter', 'sans-serif'],
-        mono: ['DM Mono', 'monospace']
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 64px));
+      margin: auto;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .muted { color: var(--muted); }
+
+    /* HEADER */
+
+    header {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 0;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .masthead {
+      padding: 28px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-size: clamp(58px, 8vw, 100px);
+      line-height: .78;
+      letter-spacing: -3px;
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .brand-description {
+      max-width: 220px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      padding-bottom: 4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding: 15px 0;
+      overflow-x: auto;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: #555b62;
+      white-space: nowrap;
+      transition: color .2s;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    .nav-status {
+      margin-left: auto;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    /* INTRO */
+
+    .intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 35px 0 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* FEATURED STORIES */
+
+    .featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 42px;
+      padding: 38px 0 55px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .hero-visual {
+      height: 340px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .visual-caption {
+      position: absolute;
+      left: 20px;
+      bottom: 17px;
+      color: #b8c5ce;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .08em;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 15px;
+      margin: 22px 0 12px;
+      color: var(--blue);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(38px, 4.5vw, 57px);
+      font-weight: 400;
+      line-height: .99;
+      letter-spacing: -.7px;
+      max-width: 760px;
+      margin: 0 0 16px;
+    }
+
+    .hero-description {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #62676e;
+      max-width: 650px;
+      margin: 0;
+    }
+
+    .read-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--blue);
+      font-size: 13px;
+      border-bottom: 1px solid var(--blue);
+      padding-bottom: 3px;
+    }
+
+    .side-stories {
+      padding-top: 40px;
+    }
+
+    .side-story {
+      padding: 0 0 23px;
+      margin-bottom: 23px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .side-story:last-child {
+      border-bottom: none;
+    }
+
+    .side-story .mono {
+      color: var(--blue);
+    }
+
+    .side-story h3 {
+      font-family: var(--serif);
+      font-size: 27px;
+      line-height: 1.05;
+      font-weight: 400;
+      margin: 10px 0;
+    }
+
+    .side-story p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* LATEST */
+
+    .latest {
+      padding: 48px 0 55px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      font-family: var(--serif);
+      font-size: 39px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .section-heading a {
+      color: var(--blue);
+      font-size: 12px;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .article-card {
+      border-top: 1px solid var(--line);
+      padding-top: 15px;
+    }
+
+    .article-card .mono {
+      color: var(--blue);
+    }
+
+    .article-card h3 {
+      font-family: var(--serif);
+      font-size: 29px;
+      line-height: 1.05;
+      font-weight: 400;
+      margin: 13px 0 10px;
+    }
+
+    .article-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* RESEARCH DOMAINS */
+
+    .domains {
+      padding: 48px 0 58px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .domain {
+      border-top: 2px solid var(--ink);
+      padding-top: 14px;
+    }
+
+    .domain-number {
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .domain h3 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      margin: 0 0 9px;
+    }
+
+    .domain p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* COMPUTATIONAL OBSERVATORY */
+
+    .observatory {
+      padding: 55px 0 60px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .observatory-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 45px;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    .observatory-copy h3 {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1;
+      margin: 0 0 17px;
+    }
+
+    .observatory-copy p {
+      color: #686e75;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    .observatory-data {
+      margin-top: 25px;
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .data-item span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .data-item strong {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--blue);
+    }
+
+    .observatory-visual {
+      min-height: 290px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .observatory-visual svg {
+      display: block;
+      width: 100%;
+      height: 290px;
+    }
+
+    .observatory-label {
+      position: absolute;
+      top: 17px;
+      left: 19px;
+      color: #a9bac5;
+    }
+
+    .observatory-coordinates {
+      position: absolute;
+      bottom: 16px;
+      right: 18px;
+      color: #a9bac5;
+      text-align: right;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 35px 0 45px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 43px;
+      letter-spacing: -1px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+    }
+
+    @media (max-width: 800px) {
+      .container { width: min(100% - 36px, 600px); }
+
+      .masthead {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .brand { font-size: 76px; }
+
+      nav { gap: 22px; }
+
+      .nav-status { display: none; }
+
+      .featured {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .side-stories {
+        padding-top: 10px;
+      }
+
+      .hero-visual { height: 270px; }
+
+      .article-grid { grid-template-columns: 1fr 1fr; }
+
+      .domain-grid { grid-template-columns: 1fr 1fr; }
+
+      .observatory-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
       }
     }
-  }
-}
-</script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+    @media (max-width: 520px) {
+      .topline { font-size: 9px; }
 
-html {
-  scroll-behavior: smooth;
-}
+      .intro {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
 
-body {
-  background: #fff;
-  color: #151515;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+      .article-grid,
+      .domain-grid {
+        grid-template-columns: 1fr;
+      }
 
-.serif {
-  font-family: 'Playfair Display', Georgia, serif;
-}
+      .hero-visual { height: 230px; }
 
-.mono {
-  font-family: 'DM Mono', monospace;
-}
+      .footer-main {
+        align-items: flex-start;
+        flex-direction: column;
+      }
 
-.page {
-  max-width: 1440px;
-  margin: auto;
-  padding-left: 48px;
-  padding-right: 48px;
-}
-
-.rule {
-  border-color: #e5e5e5;
-}
-
-.article-image {
-  overflow: hidden;
-  background: #efefed;
-}
-
-.article-image img {
-  transition: transform .6s ease;
-}
-
-.article-image:hover img {
-  transform: scale(1.035);
-}
-
-.article-title {
-  transition: color .2s ease;
-}
-
-.article-link:hover .article-title {
-  color: #315D91;
-}
-
-.nav-item:hover {
-  color: #315D91;
-}
-
-.blue-label {
-  color: #315D91;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1.3px;
-  text-transform: uppercase;
-}
-
-.story-card {
-  transition: opacity .2s ease;
-}
-
-.story-card.hidden {
-  display: none;
-}
-
-.lab-indicator {
-  width: 7px;
-  height: 7px;
-  background: #315D91;
-  border-radius: 50%;
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: .25; }
-}
-
-#searchInput:focus {
-  outline: none;
-}
-
-@media(max-width: 768px) {
-  .page {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-@media(max-width: 480px) {
-  .masthead {
-    font-size: 46px;
-  }
-}
-</style>
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ================================== -->
-<!-- HEADER / MASTHEAD -->
-<!-- ================================== -->
+<header>
+  <div class="container">
 
-<header class="page pt-7">
-
-  <div class="flex justify-between items-center">
-
-    <div class="flex items-center gap-3">
-
-      <a href="#" class="serif text-[39px] md:text-[46px] font-bold tracking-[-3px] leading-none">
-        MATUBIT<span class="text-accent">.</span>
-      </a>
-
-      <div class="hidden sm:block border-l border-gray-300 pl-3">
-        <p class="mono text-[8px] text-gray-500 tracking-[1.5px]">
-          INDEPENDENT
-        </p>
-        <p class="mono text-[8px] text-gray-500 tracking-[1.5px]">
-          SCIENCE & RESEARCH
-        </p>
-      </div>
-
+    <div class="topline mono">
+      <span>Independent Research Laboratory</span>
+      <span>Mathematics · Cognition · Complex Systems</span>
     </div>
 
-    <div class="flex items-center gap-5">
+    <div class="masthead">
+      <a href="#" class="brand">MATU<span>BIT</span></a>
 
-      <div class="hidden sm:block text-right">
-        <p class="mono text-[9px] text-gray-400">LAB / SYSTEM TIME</p>
-        <p id="clock" class="mono text-xs mt-1">--:--:--</p>
+      <div class="brand-description">
+        Exploring the mathematical structures underlying complex phenomena.
       </div>
-
-      <div class="flex items-center gap-2">
-        <span class="lab-indicator"></span>
-        <span class="mono text-[9px] text-gray-500">ACTIVE</span>
-      </div>
-
     </div>
+
+    <nav>
+      <a href="#mathematics">Mathematics</a>
+      <a href="#cognition">Cognition</a>
+      <a href="#complex-systems">Complex Systems</a>
+      <a href="#computational-science">Computational Science</a>
+      <a href="#archive">Archive</a>
+      <span class="nav-status mono">● Independent Lab</span>
+    </nav>
 
   </div>
-
-
-  <!-- MAIN NAVIGATION -->
-
-  <nav class="mt-7 border-y border-gray-300">
-
-    <div class="flex items-center justify-between gap-4 py-4">
-
-      <div class="flex items-center gap-5 md:gap-9 overflow-x-auto whitespace-nowrap">
-
-        <a href="#mathematics" class="nav-item text-[11px] font-semibold">
-          Mathematics
-        </a>
-
-        <a href="#cognition" class="nav-item text-[11px] font-semibold">
-          Cognition
-        </a>
-
-        <a href="#systems" class="nav-item text-[11px] font-semibold">
-          Complex Systems
-        </a>
-
-        <a href="#computational" class="nav-item text-[11px] font-semibold">
-          Computational Science
-        </a>
-
-        <a href="#archive" class="nav-item text-[11px] font-semibold">
-          Archive
-        </a>
-
-      </div>
-
-      <button id="searchToggle"
-        class="text-xs font-semibold hover:text-accent whitespace-nowrap">
-        SEARCH +
-      </button>
-
-    </div>
-
-    <!-- SEARCH PANEL -->
-
-    <div id="searchPanel" class="hidden border-t border-gray-200 py-4">
-
-      <form id="searchForm" class="flex gap-3 items-center">
-
-        <span class="mono text-accent">&gt;_</span>
-
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="Search MATUBIT research..."
-          class="flex-1 text-sm py-2"
-        >
-
-        <button class="text-xs text-accent font-semibold">
-          SEARCH →
-        </button>
-
-      </form>
-
-      <p id="searchStatus" class="mono text-[9px] text-gray-400 mt-2">
-        RESEARCH ARCHIVE / READY
-      </p>
-
-    </div>
-
-  </nav>
-
 </header>
 
+<main class="container">
 
-<main class="page">
+  <section class="intro">
+    <p>Research at the intersection of mathematics and complex systems.</p>
+    <span class="mono muted">Research notes / 2026</span>
+  </section>
 
+  <!-- FEATURED RESEARCH -->
 
-<!-- ================================== -->
-<!-- FEATURED STORY -->
-<!-- ================================== -->
+  <section class="featured">
 
-<section class="pt-9 md:pt-12 pb-10">
+    <article>
+      <div class="section-label mono">Featured Research / 001</div>
 
-  <div class="flex justify-between items-center mb-7">
+      <div class="hero-visual">
+        <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="glow">
+              <stop offset="0%" stop-color="#63b7c5" stop-opacity=".25"/>
+              <stop offset="100%" stop-color="#63b7c5" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
 
-    <p class="blue-label">
-      Independent scientific research
-    </p>
+          <circle cx="400" cy="200" r="180" fill="url(#glow)"/>
 
-    <p class="mono text-[9px] text-gray-400">
-      MATUBIT / VOL. 001 / 2026
-    </p>
+          <g stroke="#8baab9" stroke-width=".6" opacity=".25">
+            <path d="M70 200 H730"/>
+            <path d="M400 35 V365"/>
+            <path d="M140 90 L660 310"/>
+            <path d="M140 310 L660 90"/>
+          </g>
 
-  </div>
+          <g fill="none" stroke="#63b7c5" stroke-width="1.3" opacity=".9">
+            <path d="M165 210 C190 60 340 80 370 175 S500 315 575 210 S480 70 415 150 S330 300 245 235 S220 125 300 115"/>
+            <path d="M180 220 C210 80 345 95 380 180 S510 300 590 205 S485 65 420 145 S335 285 250 225 S230 135 310 125" opacity=".55"/>
+            <path d="M190 230 C220 100 350 110 390 185 S520 285 605 200 S490 60 425 140 S340 270 255 215 S240 145 320 135" opacity=".3"/>
+          </g>
 
+          <g fill="#d4e7ec">
+            <circle cx="400" cy="180" r="3"/>
+            <circle cx="575" cy="210" r="3"/>
+            <circle cx="245" cy="235" r="2.5"/>
+          </g>
 
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
+          <g fill="#9ab1bd" font-family="monospace" font-size="9" opacity=".7">
+            <text x="85" y="45">DYNAMIC SYSTEM / PHASE SPACE</text>
+            <text x="85" y="360">MATUBIT RESEARCH SERIES</text>
+            <text x="670" y="360">01 — 26</text>
+          </g>
+        </svg>
 
-    <!-- MAIN FEATURE -->
-
-    <article class="md:col-span-8 story-card">
-
-      <a href="#feature">
-
-        <div class="article-image aspect-[16/9]">
-
-          <!-- REPLACE IMAGE LATER -->
-
-          <img
-            src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=85&w=1600"
-            alt="Abstract mathematical structures"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <div class="mt-5">
-
-          <p class="blue-label mb-3">
-            Mathematics / Complex systems
-          </p>
-
-          <h1 class="serif masthead text-4xl md:text-[54px] leading-[1.08] tracking-[-1.5px] article-title">
-            The Geometry of Stability: Understanding the Collapse of Symmetry
-          </h1>
-
-          <p class="text-sm text-gray-600 leading-7 mt-5 max-w-2xl">
-            How does a complex system lose its symmetry? An exploration
-            of spectral geometry, network memory and the mathematical
-            conditions that govern transitions between dynamic states.
-          </p>
-
-        </div>
-
-      </a>
-
-      <div class="flex items-center gap-3 mt-5 text-[10px] text-gray-400">
-        <span>MATUBIT RESEARCH</span>
-        <span>·</span>
-        <span>THEORETICAL STUDY</span>
+        <div class="visual-caption">FIG. 01 — DYNAMIC CONFIGURATION / PHASE SPACE</div>
       </div>
 
-    </article>
+      <div class="hero-meta mono">
+        <span>Complex Systems</span>
+        <span>·</span>
+        <span>Mathematical Modeling</span>
+      </div>
 
+      <h1 class="hero-title">
+        The geometry of stability in complex dynamical systems
+      </h1>
 
-    <!-- SECONDARY FEATURE -->
-
-    <aside class="md:col-span-4 md:border-l border-gray-200 md:pl-8">
-
-      <p class="blue-label mb-5">
-        Research highlights
+      <p class="hero-description">
+        Investigating how the structural properties of a system determine
+        its stability, symmetry and transitions between dynamical regimes.
       </p>
 
+      <a href="#archive" class="read-link">Explore research →</a>
+    </article>
 
-      <article class="story-card article-link border-t border-gray-200 py-5">
+    <aside class="side-stories">
 
-        <a href="#cognition">
-
-          <p class="blue-label mb-2">
-            Computational cognition
-          </p>
-
-          <h2 class="serif article-title text-[26px] leading-[1.2]">
-            Memory, Persistence and the Dynamics of Mental States
-          </h2>
-
-          <p class="text-xs text-gray-500 leading-6 mt-3">
-            How interactions between processes and slow memory
-            shape the persistence of dynamic configurations.
-          </p>
-
-        </a>
-
+      <article class="side-story">
+        <span class="mono">01 / Graph Dynamics</span>
+        <h3>Symmetry breaking in networks with memory</h3>
+        <p>How spectral properties and graph geometry shape the dynamics of collective systems.</p>
       </article>
 
-
-      <article class="story-card article-link border-t border-gray-200 py-5">
-
-        <a href="#systems">
-
-          <p class="blue-label mb-2">
-            Theoretical foundations
-          </p>
-
-          <h2 class="serif article-title text-[26px] leading-[1.2]">
-            Rethinking the Foundations of Mind
-          </h2>
-
-          <p class="text-xs text-gray-500 leading-6 mt-3">
-            Relation and transformation as fundamental principles
-            in the emergence of mental configurations.
-          </p>
-
-        </a>
-
+      <article class="side-story">
+        <span class="mono">02 / Computational Cognition</span>
+        <h3>Memory, competition and persistent configurations</h3>
+        <p>A dynamical approach to the emergence and persistence of cognitive states.</p>
       </article>
 
-
-      <article class="story-card article-link border-t border-b border-gray-200 py-5">
-
-        <a href="#computational">
-
-          <p class="blue-label mb-2">
-            Artificial intelligence
-          </p>
-
-          <h2 class="serif article-title text-[26px] leading-[1.2]">
-            Nonlinear Semantic Inference in High-Dimensional Spaces
-          </h2>
-
-          <p class="text-xs text-gray-500 leading-6 mt-3">
-            Exploring how conceptual structures emerge from
-            interactions within vector spaces.
-          </p>
-
-        </a>
-
+      <article class="side-story">
+        <span class="mono">03 / Mathematical Foundations</span>
+        <h3>Relations, transformations and emergent structure</h3>
+        <p>Exploring the mathematical foundations of complex relational phenomena.</p>
       </article>
-
-
-      <a href="#archive"
-        class="inline-block mt-5 text-xs font-semibold text-accent">
-        Explore all research →
-      </a>
 
     </aside>
+  </section>
 
-  </div>
+  <!-- LATEST RESEARCH -->
 
-</section>
+  <section class="latest" id="archive">
 
-
-<!-- ================================== -->
-<!-- EDITORIAL DIVIDER -->
-<!-- ================================== -->
-
-<div class="border-t border-gray-300 py-4 flex justify-between">
-
-  <p class="mono text-[9px] text-gray-400 tracking-wider">
-    LATEST RESEARCH & EXPLORATIONS
-  </p>
-
-  <p class="mono text-[9px] text-gray-400">
-    001 — 004
-  </p>
-
-</div>
-
-
-<!-- ================================== -->
-<!-- LATEST ARTICLES -->
-<!-- ================================== -->
-
-<section id="archive" class="py-8">
-
-  <div class="flex justify-between items-end mb-7">
-
-    <h2 class="serif text-3xl md:text-4xl">
-      Latest explorations
-    </h2>
-
-    <a href="#projects"
-      class="hidden sm:block text-xs font-semibold text-accent">
-      All research →
-    </a>
-
-  </div>
-
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-10">
-
-
-    <!-- ARTICLE 1 -->
-
-    <article class="story-card article-link"
-      data-search="graph dynamics laplacian symmetry memory networks">
-
-      <a href="#systems">
-
-        <div class="article-image aspect-[4/3]">
-
-          <img
-            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=85&w=900"
-            alt="Mathematical graph structure"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <p class="blue-label mt-5">
-          Graph theory
-        </p>
-
-        <h3 class="serif article-title text-[25px] leading-[1.2] mt-2">
-          Laplacian Memory and Symmetry Breaking in Networks
-        </h3>
-
-        <p class="text-xs text-gray-500 leading-6 mt-3">
-          The role of spectral structure in the emergence
-          and collapse of network symmetries.
-        </p>
-
-      </a>
-
-    </article>
-
-
-    <!-- ARTICLE 2 -->
-
-    <article class="story-card article-link"
-      data-search="cognition computational memory dynamic systems">
-
-      <a href="#cognition">
-
-        <div class="article-image aspect-[4/3]">
-
-          <img
-            src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?q=85&w=900"
-            alt="Neuroscience research"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <p class="blue-label mt-5">
-          Computational cognition
-        </p>
-
-        <h3 class="serif article-title text-[25px] leading-[1.2] mt-2">
-          Memory as a Dynamic Mechanism of Persistence
-        </h3>
-
-        <p class="text-xs text-gray-500 leading-6 mt-3">
-          Modeling the relationship between coactivation,
-          memory and stability.
-        </p>
-
-      </a>
-
-    </article>
-
-
-    <!-- ARTICLE 3 -->
-
-    <article class="story-card article-link"
-      data-search="ontology msrt relation transformation mind">
-
-      <a href="#foundations">
-
-        <div class="article-image aspect-[4/3]">
-
-          <img
-            src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=85&w=900"
-            alt="Abstract geometric structures"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <p class="blue-label mt-5">
-          Foundations
-        </p>
-
-        <h3 class="serif article-title text-[25px] leading-[1.2] mt-2">
-          Relation and Transformation: Toward a New Ontology
-        </h3>
-
-        <p class="text-xs text-gray-500 leading-6 mt-3">
-          An investigation into the fundamental principles
-          underlying dynamic systems.
-        </p>
-
-      </a>
-
-    </article>
-
-
-    <!-- ARTICLE 4 -->
-
-    <article class="story-card article-link"
-      data-search="semantic inference a3 artificial intelligence vectors">
-
-      <a href="#computational">
-
-        <div class="article-image aspect-[4/3]">
-
-          <img
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=85&w=900"
-            alt="Computational technology"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <p class="blue-label mt-5">
-          Semantic systems
-        </p>
-
-        <h3 class="serif article-title text-[25px] leading-[1.2] mt-2">
-          The Emergence of Concepts in Vector Spaces
-        </h3>
-
-        <p class="text-xs text-gray-500 leading-6 mt-3">
-          Computational experiments in nonlinear semantic inference.
-        </p>
-
-      </a>
-
-    </article>
-
-
-    <!-- ARTICLE 5 -->
-
-    <article class="story-card article-link"
-      data-search="mathematics dynamical systems attractors stability">
-
-      <a href="#mathematics">
-
-        <div class="article-image aspect-[4/3]">
-
-          <img
-            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=85&w=900"
-            alt="Mathematical visualization"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <p class="blue-label mt-5">
-          Mathematics
-        </p>
-
-        <h3 class="serif article-title text-[25px] leading-[1.2] mt-2">
-          Stability, Bifurcations and Dynamic Transitions
-        </h3>
-
-        <p class="text-xs text-gray-500 leading-6 mt-3">
-          Exploring the mathematical conditions governing
-          changes in system behavior.
-        </p>
-
-      </a>
-
-    </article>
-
-
-    <!-- ARTICLE 6 -->
-
-    <article class="story-card article-link"
-      data-search="science applied methodology cognitive training">
-
-      <a href="#applied">
-
-        <div class="article-image aspect-[4/3]">
-
-          <img
-            src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=85&w=900"
-            alt="Scientific laboratory"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-        <p class="blue-label mt-5">
-          Applied science
-        </p>
-
-        <h3 class="serif article-title text-[25px] leading-[1.2] mt-2">
-          From Computational Models to Applied Methodologies
-        </h3>
-
-        <p class="text-xs text-gray-500 leading-6 mt-3">
-          Translating scientific models into practical
-          methodological developments.
-        </p>
-
-      </a>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ================================== -->
-<!-- RESEARCH DOMAINS -->
-<!-- ================================== -->
-
-<section id="projects" class="border-t border-gray-300 pt-12 pb-14">
-
-  <p class="blue-label mb-4">
-    Research domains
-  </p>
-
-  <h2 class="serif text-4xl md:text-5xl mb-9">
-    Exploring the boundaries of science.
-  </h2>
-
-
-  <div class="grid grid-cols-1 md:grid-cols-4 border-y border-gray-200">
-
-    <a href="#mathematics"
-      id="mathematics"
-      class="p-6 pl-0 border-b md:border-b-0 md:border-r border-gray-200 group">
-
-      <span class="mono text-[9px] text-accent">01</span>
-
-      <h3 class="serif text-2xl mt-4 group-hover:text-accent">
-        Mathematics
-      </h3>
-
-      <p class="text-xs text-gray-500 leading-6 mt-3">
-        Dynamical systems, geometry, graphs and nonlinear structures.
-      </p>
-
-    </a>
-
-
-    <a href="#cognition"
-      id="cognition"
-      class="p-6 md:border-r border-b md:border-b-0 border-gray-200 group">
-
-      <span class="mono text-[9px] text-accent">02</span>
-
-      <h3 class="serif text-2xl mt-4 group-hover:text-accent">
-        Cognition
-      </h3>
-
-      <p class="text-xs text-gray-500 leading-6 mt-3">
-        Computational neuroscience, memory and mental dynamics.
-      </p>
-
-    </a>
-
-
-    <a href="#systems"
-      id="systems"
-      class="p-6 md:border-r border-b md:border-b-0 border-gray-200 group">
-
-      <span class="mono text-[9px] text-accent">03</span>
-
-      <h3 class="serif text-2xl mt-4 group-hover:text-accent">
-        Complex systems
-      </h3>
-
-      <p class="text-xs text-gray-500 leading-6 mt-3">
-        Emergence, network theory, symmetry and collective behavior.
-      </p>
-
-    </a>
-
-
-    <a href="#computational"
-      id="computational"
-      class="p-6 pr-0 group">
-
-      <span class="mono text-[9px] text-accent">04</span>
-
-      <h3 class="serif text-2xl mt-4 group-hover:text-accent">
-        Computational science
-      </h3>
-
-      <p class="text-xs text-gray-500 leading-6 mt-3">
-        Algorithms, semantic systems and computational experiments.
-      </p>
-
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- ================================== -->
-<!-- LABORATORY -->
-<!-- ================================== -->
-
-<section class="bg-[#F5F5F3] -mx-5 md:-mx-12 px-5 md:px-12 py-12 md:py-16">
-
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-
-    <div class="md:col-span-7">
-
-      <p class="blue-label">
-        Beyond the published research
-      </p>
-
-      <h2 class="serif text-4xl md:text-5xl leading-tight mt-4">
-        Enter the laboratory.
-      </h2>
-
-      <p class="text-sm text-gray-600 leading-7 mt-5 max-w-xl">
-        Explore computational models, interactive simulations
-        and experimental environments developed within MATUBIT.
-      </p>
-
-      <a href="#laboratory"
-        class="inline-block mt-7 text-xs font-semibold text-accent border-b border-accent pb-1">
-        EXPLORE SIMULATIONS →
-      </a>
-
+    <div class="section-heading">
+      <h2>Latest explorations</h2>
+      <a href="#archive" class="mono">Research archive →</a>
     </div>
 
+    <div class="article-grid">
 
-    <div class="md:col-span-5">
+      <article class="article-card">
+        <span class="mono">Graph Theory / 2026</span>
+        <h3>Memory-driven transitions in graph systems</h3>
+        <p>Investigating the relationship between graph spectra, symmetry and abrupt dynamical transitions.</p>
+      </article>
 
-      <div class="bg-white p-6 border border-gray-200">
+      <article class="article-card">
+        <span class="mono">Cognitive Dynamics / 2026</span>
+        <h3>Slow-fast interactions and memory persistence</h3>
+        <p>A mathematical model of competing processes coupled through adaptive memory.</p>
+      </article>
 
-        <div class="flex justify-between items-center border-b border-gray-200 pb-4">
+      <article class="article-card">
+        <span class="mono">Nonlinear Systems / 2026</span>
+        <h3>Stability, bifurcations and symmetry</h3>
+        <p>Analyzing the geometric conditions that govern the loss of stability in dynamical systems.</p>
+      </article>
 
-          <span class="mono text-[9px] tracking-wider">
-            MATUBIT / LAB MONITOR
-          </span>
+      <article class="article-card">
+        <span class="mono">Semantic Modeling / 2026</span>
+        <h3>Nonlinear inference in semantic spaces</h3>
+        <p>Exploring conceptual emergence through interactions in high-dimensional vector spaces.</p>
+      </article>
 
-          <span class="flex items-center gap-2 mono text-[9px] text-accent">
-            <span class="lab-indicator"></span>
-            ONLINE
-          </span>
+      <article class="article-card">
+        <span class="mono">Theoretical Research / 2026</span>
+        <h3>Relational foundations of cognition</h3>
+        <p>A theoretical investigation into relation, transformation and emergent organization.</p>
+      </article>
 
-        </div>
+      <article class="article-card">
+        <span class="mono">Computational Methods / 2026</span>
+        <h3>Geometry as a language of complex phenomena</h3>
+        <p>Mathematical tools for describing structural organization and dynamical change.</p>
+      </article>
 
-        <div class="py-7">
+    </div>
+  </section>
 
-          <svg viewBox="0 0 300 90" class="w-full" fill="none">
+  <!-- RESEARCH AREAS -->
 
-            <path d="M0 45 H300"
-              stroke="#E5E5E5"
-              stroke-dasharray="3 5"/>
+  <section class="domains">
 
-            <path id="labWave"
-              d=""
-              stroke="#315D91"
-              stroke-width="1.8"
-              fill="none"/>
+    <div class="section-heading">
+      <h2>Research domains</h2>
+      <span class="mono muted">Areas of investigation</span>
+    </div>
 
-          </svg>
+    <div class="domain-grid">
 
-          <div class="flex justify-between mono text-[8px] text-gray-400 mt-3">
-            <span>OSCILLATION / 01</span>
-            <span>LIVE VISUALIZATION</span>
+      <article class="domain" id="mathematics">
+        <div class="domain-number mono">01</div>
+        <h3>Mathematics</h3>
+        <p>Nonlinear systems, dynamical stability, bifurcation theory and mathematical structures.</p>
+      </article>
+
+      <article class="domain" id="cognition">
+        <div class="domain-number mono">02</div>
+        <h3>Cognition</h3>
+        <p>Computational models of cognition, memory, emergence and persistent mental configurations.</p>
+      </article>
+
+      <article class="domain" id="complex-systems">
+        <div class="domain-number mono">03</div>
+        <h3>Complex Systems</h3>
+        <p>Networks, symmetry, collective behavior and adaptive dynamical processes.</p>
+      </article>
+
+      <article class="domain" id="computational-science">
+        <div class="domain-number mono">04</div>
+        <h3>Computational Science</h3>
+        <p>Numerical experiments, simulation, algorithmic modeling and computational methods.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- COMPUTATIONAL OBSERVATORY -->
+
+  <section class="observatory">
+
+    <div class="section-heading">
+      <h2>Computational observatory</h2>
+      <span class="mono muted">Experimental visualization</span>
+    </div>
+
+    <div class="observatory-layout">
+
+      <div class="observatory-copy">
+        <span class="mono" style="color:var(--blue)">Dynamical systems / 001</span>
+
+        <h3>Observing the structure of motion</h3>
+
+        <p>
+          A visual exploration of nonlinear dynamics, phase spaces and
+          emergent configurations. Mathematical systems examined through
+          computational experiments.
+        </p>
+
+        <div class="observatory-data">
+          <div class="data-item">
+            <span class="mono">System</span>
+            <strong>NONLINEAR</strong>
           </div>
 
-        </div>
-
-        <div class="grid grid-cols-2 border-t border-gray-200 pt-5">
-
-          <div>
-            <p class="mono text-[9px] text-gray-400">
-              RESEARCH DOMAINS
-            </p>
-            <p class="serif text-3xl mt-2">04</p>
+          <div class="data-item">
+            <span class="mono">Domain</span>
+            <strong>PHASE SPACE</strong>
           </div>
 
-          <div>
-            <p class="mono text-[9px] text-gray-400">
-              ENVIRONMENT
-            </p>
-            <p class="serif text-xl mt-3">Active</p>
+          <div class="data-item">
+            <span class="mono">Method</span>
+            <strong>NUMERICAL</strong>
           </div>
-
         </div>
+      </div>
 
+      <div class="observatory-visual">
+
+        <div class="observatory-label mono">COMPUTATIONAL EXPERIMENT / 001</div>
+
+        <svg id="phase-space" viewBox="0 0 650 290" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#53616b" stroke-width=".6" opacity=".5">
+            <path d="M30 145 H620"/>
+            <path d="M325 30 V260"/>
+            <path d="M100 40 V250" stroke-dasharray="2 5"/>
+            <path d="M550 40 V250" stroke-dasharray="2 5"/>
+            <path d="M30 75 H620" stroke-dasharray="2 5"/>
+            <path d="M30 215 H620" stroke-dasharray="2 5"/>
+          </g>
+
+          <g id="orbit" fill="none" stroke="#63b7c5" stroke-width="1.2">
+            <path d="M325 145 C380 30 500 50 515 130 C530 210 425 250 350 190 C275 130 170 70 145 145 C120 220 250 260 325 145"/>
+            <path d="M325 145 C370 45 480 60 495 130 C510 200 420 235 355 185 C290 135 190 85 160 145 C135 205 245 245 325 145" opacity=".4"/>
+          </g>
+
+          <g fill="#d9f1f4">
+            <circle cx="325" cy="145" r="3"/>
+            <circle cx="515" cy="130" r="2.5"/>
+          </g>
+
+          <g fill="#9ab1bd" font-family="monospace" font-size="9">
+            <text x="34" y="24">X(t)</text>
+            <text x="590" y="135">X</text>
+            <text x="334" y="38">Y</text>
+            <text x="34" y="274">STATE SPACE / SIMULATED TRAJECTORY</text>
+          </g>
+        </svg>
+
+        <div class="observatory-coordinates mono">
+          x(t) · y(t) · trajectory
+        </div>
       </div>
 
     </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================================== -->
-<!-- ABOUT MATUBIT -->
-<!-- ================================== -->
-
-<section id="applied" class="py-16 md:py-20">
-
-  <div class="max-w-3xl mx-auto text-center">
-
-    <p class="blue-label">
-      About MATUBIT
-    </p>
-
-    <h2 class="serif text-4xl md:text-5xl mt-5 leading-tight">
-      Science begins with a question.
-    </h2>
-
-    <p class="text-sm leading-8 text-gray-600 mt-7">
-      MATUBIT is an independent research laboratory exploring
-      the mathematical, computational and theoretical foundations
-      of complex systems, cognition and emergent phenomena.
-    </p>
-
-  </div>
-
-</section>
-
+  </section>
 
 </main>
 
+<footer>
+  <div class="container">
 
-<!-- ================================== -->
-<!-- FOOTER -->
-<!-- ================================== -->
-
-<footer class="border-t border-gray-300">
-
-  <div class="page py-9">
-
-    <div class="flex flex-col md:flex-row justify-between gap-8">
-
+    <div class="footer-main">
       <div>
-
-        <a href="#" class="serif text-3xl font-bold tracking-[-2px]">
-          MATUBIT<span class="text-accent">.</span>
-        </a>
-
-        <p class="mono text-[9px] text-gray-400 mt-2 tracking-wider">
-          INDEPENDENT SCIENTIFIC LABORATORY
-        </p>
-
+        <div class="footer-brand">MATUBIT</div>
+        <div class="mono muted">Independent Scientific Research</div>
       </div>
 
-      <div class="flex flex-wrap gap-6 text-xs text-gray-500">
-
-        <a href="#research" class="hover:text-accent">Research</a>
-        <a href="#laboratory" class="hover:text-accent">Laboratory</a>
-        <a href="#projects" class="hover:text-accent">Domains</a>
-        <a href="#archive" class="hover:text-accent">Archive</a>
-
-      </div>
-
+      <p class="footer-note">
+        A space for mathematical exploration, computational experimentation
+        and theoretical research into complex phenomena.
+      </p>
     </div>
 
-    <div class="border-t border-gray-200 mt-8 pt-5 flex justify-between">
-
-      <p class="mono text-[9px] text-gray-400">
-        © 2026 MATUBIT
-      </p>
-
-      <p class="mono text-[9px] text-gray-400">
-        UNDERSTANDING THROUGH EXPLORATION.
-      </p>
-
+    <div class="footer-bottom mono">
+      <span>© MATUBIT 2026</span>
+      <span>Mathematics · Computation · Emergence</span>
     </div>
 
   </div>
-
 </footer>
-
-
-<!-- ================================== -->
-<!-- JAVASCRIPT -->
-<!-- ================================== -->
-
-<script>
-
-// SYSTEM CLOCK
-
-function updateClock() {
-
-  const time = new Intl.DateTimeFormat('es-CL', {
-    timeZone: 'America/Santiago',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  }).format(new Date());
-
-  document.getElementById('clock').textContent = time;
-
-}
-
-updateClock();
-setInterval(updateClock, 1000);
-
-
-// SEARCH PANEL
-
-const toggle = document.getElementById('searchToggle');
-const panel = document.getElementById('searchPanel');
-const input = document.getElementById('searchInput');
-
-toggle.addEventListener('click', () => {
-
-  panel.classList.toggle('hidden');
-
-  if (!panel.classList.contains('hidden')) {
-    input.focus();
-  }
-
-});
-
-
-// ARTICLE SEARCH
-
-const searchForm = document.getElementById('searchForm');
-const searchStatus = document.getElementById('searchStatus');
-const stories = document.querySelectorAll('[data-search]');
-
-searchForm.addEventListener('submit', event => {
-
-  event.preventDefault();
-
-  const query = input.value.toLowerCase().trim();
-
-  let count = 0;
-
-  stories.forEach(story => {
-
-    const text = (
-      story.innerText + ' ' + story.dataset.search
-    ).toLowerCase();
-
-    const match = text.includes(query);
-
-    story.classList.toggle('hidden', query !== '' && !match);
-
-    if (match) count++;
-
-  });
-
-  searchStatus.textContent =
-    `SEARCH COMPLETE — ${count} RESULTS`;
-
-});
-
-
-// ANIMATED LAB SIGNAL
-
-const labWave = document.getElementById('labWave');
-
-let phase = 0;
-
-function animateSignal() {
-
-  phase += 0.035;
-
-  let path = '';
-
-  for (let x = 0; x <= 300; x += 3) {
-
-    const y = 45 +
-      Math.sin(x * 0.055 + phase) * 17 +
-      Math.sin(x * 0.12 + phase * 1.4) * 5;
-
-    path += `${x === 0 ? 'M' : 'L'} ${x} ${y} `;
-
-  }
-
-  labWave.setAttribute('d', path);
-
-  requestAnimationFrame(animateSignal);
-
-}
-
-animateSignal();
-
-</script>
 
 </body>
 </html>
