@@ -1,907 +1,321 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10151b">
-<title>MATUBIT — Independent Research Laboratory</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --paper: #f8f8f5;
-  --ink: #202329;
-  --muted: #777d85;
-  --line: #dedfdd;
-  --blue: #315d91;
-  --cyan: #66c4d1;
-  --dark: #101820;
-  --serif: "Instrument Serif", Georgia, serif;
-  --sans: "Source Sans 3", sans-serif;
-  --mono: "DM Mono", monospace;
-}
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
-  -webkit-font-smoothing: antialiased;
-}
-
-a { color: inherit; text-decoration: none; }
-
-.container {
-  width: min(1240px, calc(100% - 64px));
-  margin: auto;
-}
-
-.mono {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-.muted { color: var(--muted); }
-
-header { border-bottom: 1px solid var(--line); }
-
-.topline {
-  display: flex;
-  justify-content: space-between;
-  padding: 13px 0;
-  color: var(--muted);
-  border-bottom: 1px solid var(--line);
-}
-
-.masthead {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 30px 0 25px;
-}
-
-.brand {
-  font-family: var(--serif);
-  font-size: clamp(65px, 9vw, 108px);
-  line-height: .76;
-  letter-spacing: -3px;
-}
-
-.brand span { color: var(--blue); }
-
-.brand-note {
-  max-width: 250px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 29px;
-  padding: 15px 0;
-  border-top: 1px solid var(--line);
-  overflow-x: auto;
-}
-
-nav a {
-  font-size: 13px;
-  white-space: nowrap;
-  color: #555b62;
-}
-
-nav a:hover { color: var(--blue); }
-
-.nav-status {
-  margin-left: auto;
-  color: var(--blue);
-  white-space: nowrap;
-}
-
-.intro {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 0 20px;
-  border-bottom: 1px solid var(--line);
-}
-
-.intro p {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-
-.featured {
-  display: grid;
-  grid-template-columns: 1.85fr 1fr;
-  gap: 42px;
-  padding: 38px 0 55px;
-  border-bottom: 1px solid var(--line);
-}
-
-.section-label { color: var(--blue); margin-bottom: 18px; }
-
-.hero-visual {
-  height: 345px;
-  background: var(--dark);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-visual canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.visual-caption {
-  position: absolute;
-  bottom: 16px;
-  left: 18px;
-  color: #a8bdc7;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: .07em;
-  pointer-events: none;
-}
-
-.hero-meta {
-  display: flex;
-  gap: 13px;
-  margin: 21px 0 12px;
-  color: var(--blue);
-}
-
-.hero-title {
-  font-family: var(--serif);
-  font-size: clamp(39px, 4.5vw, 59px);
-  font-weight: 400;
-  line-height: .98;
-  letter-spacing: -.5px;
-  margin: 0 0 17px;
-  max-width: 760px;
-}
-
-.hero-description {
-  color: #626971;
-  font-size: 16px;
-  line-height: 1.65;
-  max-width: 640px;
-  margin: 0;
-}
-
-.read-link {
-  display: inline-block;
-  margin-top: 20px;
-  color: var(--blue);
-  font-size: 13px;
-  border-bottom: 1px solid var(--blue);
-  padding-bottom: 3px;
-}
-
-.side-stories { padding-top: 39px; }
-
-.side-story {
-  padding-bottom: 23px;
-  margin-bottom: 22px;
-  border-bottom: 1px solid var(--line);
-}
-
-.side-story:last-child { border: 0; }
-
-.side-story h3 {
-  font-family: var(--serif);
-  font-size: 29px;
-  line-height: 1.04;
-  font-weight: 400;
-  margin: 10px 0;
-}
-
-.side-story p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
-  margin: 0;
-}
-
-.section {
-  padding: 48px 0 55px;
-  border-bottom: 1px solid var(--line);
-}
-
-.section-heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 27px;
-}
-
-.section-heading h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 41px;
-  margin: 0;
-}
-
-.section-heading a {
-  color: var(--blue);
-  font-size: 12px;
-}
-
-.article-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-
-.article-card {
-  border-top: 1px solid var(--line);
-  padding-top: 15px;
-}
-
-.article-card .mono { color: var(--blue); }
-
-.article-card h3 {
-  font-family: var(--serif);
-  font-size: 29px;
-  font-weight: 400;
-  line-height: 1.05;
-  margin: 12px 0 10px;
-}
-
-.article-card p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--muted);
-  margin: 0;
-}
-
-.domain-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-  margin-top: 28px;
-}
-
-.domain {
-  border-top: 2px solid var(--ink);
-  padding-top: 14px;
-}
-
-.domain-number {
-  color: var(--blue);
-  margin-bottom: 18px;
-}
-
-.domain h3 {
-  font-family: var(--serif);
-  font-size: 27px;
-  font-weight: 400;
-  margin: 0 0 9px;
-}
-
-.domain p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
-  margin: 0;
-}
-
-/* OBSERVATORY */
-
-.observatory {
-  padding: 55px 0 60px;
-  border-bottom: 1px solid var(--line);
-}
-
-.observatory-layout {
-  display: grid;
-  grid-template-columns: .85fr 1.35fr;
-  gap: 45px;
-  align-items: center;
-}
-
-.observatory-copy h3 {
-  font-family: var(--serif);
-  font-size: 43px;
-  line-height: .98;
-  font-weight: 400;
-  margin: 15px 0;
-}
-
-.observatory-copy p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #686e75;
-}
-
-.observatory-data {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 24px;
-}
-
-.data-item span {
-  display: block;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
-.data-item strong {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--blue);
-  font-weight: 400;
-}
-
-.lab-panel {
-  background: var(--dark);
-  min-height: 320px;
-  position: relative;
-  overflow: hidden;
-}
-
-.lab-panel canvas {
-  display: block;
-  width: 100%;
-  height: 320px;
-}
-
-.lab-label {
-  position: absolute;
-  top: 17px;
-  left: 18px;
-  color: #a8bdc7;
-  pointer-events: none;
-}
-
-.lab-coordinates {
-  position: absolute;
-  right: 17px;
-  bottom: 15px;
-  color: #a8bdc7;
-  pointer-events: none;
-}
-
-.lab-controls {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 12px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.lab-controls input {
-  flex: 1;
-  accent-color: var(--blue);
-  cursor: pointer;
-}
-
-.lab-controls button {
-  background: none;
-  border: 1px solid var(--line);
-  padding: 7px 12px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--blue);
-  cursor: pointer;
-}
-
-footer { padding: 35px 0 42px; }
-
-.footer-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 30px;
-}
-
-.footer-brand {
-  font-family: var(--serif);
-  font-size: 45px;
-}
-
-.footer-note {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-  max-width: 310px;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid var(--line);
-  margin-top: 28px;
-  padding-top: 15px;
-  color: var(--muted);
-}
-
-@media(max-width: 800px) {
-  .container { width: calc(100% - 38px); }
-
-  .masthead {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .featured { grid-template-columns: 1fr; }
-
-  .side-stories { padding-top: 5px; }
-
-  .article-grid { grid-template-columns: 1fr 1fr; }
-
-  .domain-grid { grid-template-columns: 1fr 1fr; }
-
-  .observatory-layout { grid-template-columns: 1fr; }
-}
-
-@media(max-width: 520px) {
-  .topline { font-size: 8px; }
-
-  .intro {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .article-grid, .domain-grid { grid-template-columns: 1fr; }
-
-  .hero-visual { height: 245px; }
-
-  .footer-main, .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .lab-panel, .lab-panel canvas { min-height: 250px; height: 250px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b17">
+  <meta name="description" content="MATUBIT — Laboratorio independiente de investigación matemática, computacional y de sistemas complejos.">
+  <title>MATUBIT — Laboratorio de investigación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b17;
+      --bg2: #0b1122;
+      --panel: rgba(15, 23, 43, .72);
+      --line: rgba(166, 190, 230, .15);
+      --text: #edf3ff;
+      --muted: #9aa9c4;
+      --cyan: #72e5ed;
+      --violet: #a99bff;
+      --orange: #ffb27c;
+      --mono: "Space Mono", monospace;
+      --sans: "Manrope", sans-serif;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0; color: var(--text); background:
+        radial-gradient(ellipse at 50% 0%, rgba(44,72,132,.15), transparent 48%),
+        var(--bg); font-family: var(--sans); -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 56px)); margin: auto; }
+    .mono { font: 10px/1.5 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .muted { color: var(--muted); }
+    .topbar {
+      position: absolute; z-index: 5; top: 0; left: 0; right: 0;
+      border-bottom: 1px solid rgba(220,235,255,.13);
+      background: linear-gradient(180deg, rgba(4,8,18,.72), rgba(4,8,18,.08));
+    }
+    .nav {
+      min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px;
+    }
+    .nav-mark { display: flex; align-items: center; gap: 12px; color: #dce9ff; }
+    .nav-mark i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); }
+    .nav-links a { color: #c0cce1; font-size: 12px; transition: color .2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta { border: 1px solid rgba(114,229,237,.42); padding: 10px 14px; border-radius: 2px; color: var(--cyan) !important; }
+    .menu-btn { display: none; background: none; color: var(--text); border: 1px solid var(--line); padding: 9px 12px; font: 10px var(--mono); }
+    .hero {
+      min-height: min(850px, 100svh); height: 790px; max-height: 960px; position: relative;
+      display: flex; align-items: flex-end; overflow: hidden; isolation: isolate;
+      background: #080d1c;
+    }
+    .hero-art { position: absolute; inset: 0; z-index: -3; }
+    .hero-art img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -2;
+      background: linear-gradient(90deg, rgba(5,9,20,.86) 0%, rgba(5,9,20,.52) 38%, rgba(5,9,20,.06) 76%),
+                  linear-gradient(0deg, rgba(5,9,20,.82) 0%, transparent 48%, rgba(5,9,20,.3) 100%);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      box-shadow: inset 0 0 150px rgba(2,5,14,.28);
+    }
+    .hero-content { width: min(var(--max), calc(100% - 56px)); margin: 0 auto; padding: 0 0 92px; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--cyan); margin-bottom: 22px; }
+    .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--cyan); }
+    h1 { max-width: 660px; font-size: clamp(38px, 6.2vw, 76px); line-height: .99; letter-spacing: -.065em; font-weight: 600; margin: 0; }
+    h1 span { color: var(--cyan); }
+    .hero-copy { max-width: 560px; margin: 24px 0 30px; color: #c0cce0; font-size: clamp(14px, 1.4vw, 17px); line-height: 1.8; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 14px; padding: 14px 18px;
+      border: 1px solid rgba(114,229,237,.58); color: #07101d; background: var(--cyan);
+      font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; transition: transform .2s, box-shadow .2s;
+    }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(114,229,237,.2); }
+    .text-link { color: #dce7fb; font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .text-link span { color: var(--cyan); margin-left: 8px; }
+    .hero-index { position: absolute; right: 28px; bottom: 26px; color: rgba(218,231,255,.62); }
+    .scroll-cue { position: absolute; bottom: 0; left: 50%; width: 1px; height: 54px; background: linear-gradient(var(--cyan), transparent); }
+    section { position: relative; }
+    .intro-strip { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); background: #0a1020; }
+    .strip-inner { display: flex; justify-content: space-between; gap: 30px; padding: 19px 0; color: var(--muted); }
+    .strip-inner span:last-child { color: #7488ad; }
+    .section { padding: 112px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 48px; }
+    .kicker { color: var(--cyan); margin-bottom: 16px; }
+    h2 { font-size: clamp(32px, 4vw, 52px); letter-spacing: -.06em; line-height: 1.03; font-weight: 500; margin: 0; }
+    .section-intro { max-width: 440px; color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0; }
+    .research-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .research-card {
+      min-height: 280px; padding: 30px; position: relative; overflow: hidden;
+      border: 1px solid var(--line); background: linear-gradient(135deg, rgba(22,34,62,.78), rgba(10,16,31,.72));
+      transition: border-color .25s, transform .25s;
+    }
+    .research-card:hover { transform: translateY(-4px); border-color: rgba(114,229,237,.48); }
+    .card-top { display: flex; justify-content: space-between; gap: 20px; color: var(--cyan); }
+    .card-index { color: #637596; }
+    .research-card h3 { max-width: 460px; font-size: clamp(22px, 2.5vw, 31px); line-height: 1.13; letter-spacing: -.045em; font-weight: 500; margin: 42px 0 13px; }
+    .research-card p { max-width: 490px; color: var(--muted); font-size: 13px; line-height: 1.75; margin: 0; }
+    .card-orb { position: absolute; width: 180px; height: 180px; border-radius: 50%; right: -68px; bottom: -88px; opacity: .22; filter: blur(2px); background: radial-gradient(circle, var(--violet), transparent 68%); pointer-events: none; }
+    .research-card:nth-child(2) .card-orb { background: radial-gradient(circle, var(--cyan), transparent 68%); }
+    .research-card:nth-child(3) .card-orb { background: radial-gradient(circle, var(--orange), transparent 68%); }
+    .research-card:nth-child(4) .card-orb { background: radial-gradient(circle, #6e9dff, transparent 68%); }
+    .status { display: inline-flex; align-items: center; gap: 8px; color: #9cabc4; font: 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+    .status.active::before { background: var(--cyan); box-shadow: 0 0 10px rgba(114,229,237,.8); }
+    .domains { background: linear-gradient(180deg, #0a1020, #080d19); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .domain-list { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+    .domain { padding: 25px 22px 8px 0; border-right: 1px solid var(--line); }
+    .domain:not(:first-child) { padding-left: 22px; }
+    .domain:last-child { border-right: 0; }
+    .domain .mono { color: var(--violet); }
+    .domain h3 { font-size: 19px; font-weight: 500; margin: 23px 0 10px; letter-spacing: -.035em; }
+    .domain p { color: var(--muted); font-size: 12px; line-height: 1.75; margin: 0; }
+    .statement { padding: 118px 0; }
+    .statement-inner { display: grid; grid-template-columns: .75fr 1.25fr; gap: 60px; align-items: start; }
+    .statement-mark { color: var(--cyan); }
+    .statement blockquote { margin: 0; max-width: 790px; font-size: clamp(26px, 3.5vw, 43px); line-height: 1.22; letter-spacing: -.05em; font-weight: 400; }
+    .statement blockquote em { color: var(--violet); font-style: normal; }
+    .statement-note { max-width: 590px; margin: 27px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .contact { border-top: 1px solid var(--line); background: #090f1e; }
+    .contact-inner { display: flex; justify-content: space-between; align-items: center; gap: 30px; padding: 44px 0; }
+    .contact h2 { font-size: clamp(27px, 3vw, 38px); }
+    .contact p { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+    footer { border-top: 1px solid var(--line); padding: 22px 0 28px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: #73829d; }
+    .footer-inner .mono { font-size: 9px; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } * { transition-duration: .01ms !important; } }
+    @media (max-width: 760px) {
+      .wrap, .hero-content { width: calc(100% - 38px); }
+      .nav { min-height: 66px; }
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; padding: 20px 22px 24px; background: rgba(7,11,23,.97); border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; }
+      .nav-links.open { display: flex; }
+      .hero { height: 760px; min-height: 88svh; max-height: 900px; }
+      .hero-art img { object-position: 57% center; }
+      .hero::before { background: linear-gradient(90deg, rgba(5,9,20,.82), rgba(5,9,20,.3)), linear-gradient(0deg, rgba(5,9,20,.88), transparent 72%); }
+      .hero-content { padding-bottom: 80px; }
+      .strip-inner { flex-direction: column; gap: 6px; }
+      .section { padding: 78px 0; }
+      .section-head { align-items: flex-start; flex-direction: column; margin-bottom: 30px; }
+      .research-grid { grid-template-columns: 1fr; }
+      .research-card { min-height: 250px; }
+      .domain-list { grid-template-columns: repeat(2, 1fr); }
+      .domain { min-height: 170px; padding: 22px 16px 20px 0; border-bottom: 1px solid var(--line); }
+      .domain:nth-child(2) { border-right: 0; }
+      .domain:nth-child(3) { padding-left: 0; }
+      .domain:nth-child(4) { border-right: 0; }
+      .statement { padding: 82px 0; }
+      .statement-inner { grid-template-columns: 1fr; gap: 28px; }
+      .contact-inner { align-items: flex-start; flex-direction: column; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .hero { height: 720px; }
+      .hero-index { right: 18px; bottom: 18px; }
+      .research-card { padding: 24px; }
+      .domain-list { grid-template-columns: 1fr; }
+      .domain, .domain:not(:first-child) { padding: 20px 0; border-right: 0; min-height: auto; }
+    }
+  </style>
 </head>
-
 <body>
-
-<header>
-  <div class="container">
-
-    <div class="topline mono">
-      <span>Independent Research Laboratory</span>
-      <span>Mathematics · Cognition · Complex Systems</span>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="nav-mark mono" href="#inicio" aria-label="MATUBIT, inicio"><i></i> INDEPENDENT RESEARCH LAB</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">MENU +</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a href="#investigacion">Investigación</a>
+        <a href="#areas">Áreas</a>
+        <a href="#enfoque">Enfoque</a>
+        <a class="nav-cta" href="#contacto">Contacto ↗</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="masthead">
-      <a href="#" class="brand">MATU<span>BIT</span></a>
-      <div class="brand-note">
-        Exploring the mathematical structures underlying complex phenomena.
-      </div>
-    </div>
-
-    <nav>
-      <a href="#mathematics">Mathematics</a>
-      <a href="#cognition">Cognition</a>
-      <a href="#complex-systems">Complex Systems</a>
-      <a href="#computational-science">Computational Science</a>
-      <a href="#archive">Archive</a>
-      <span class="nav-status mono">● Independent Lab</span>
-    </nav>
-
-  </div>
-</header>
-
-<main class="container">
-
-  <section class="intro">
-    <p>Research at the intersection of mathematics and complex systems.</p>
-    <span class="mono muted">Research notes / 2026</span>
-  </section>
-
-  <section class="featured">
-
-    <article>
-      <div class="section-label mono">Featured Research / 001</div>
-
-      <div class="hero-visual">
-        <canvas id="heroCanvas" aria-label="Animated mathematical particle field"></canvas>
-        <div class="visual-caption">FIG. 01 — COMPUTATIONAL FIELD / LIVE SIMULATION</div>
-      </div>
-
-      <div class="hero-meta mono">
-        <span>Complex Systems</span>
-        <span>·</span>
-        <span>Mathematical Modeling</span>
-      </div>
-
-      <h1 class="hero-title">
-        The geometry of stability in complex dynamical systems
-      </h1>
-
-      <p class="hero-description">
-        Investigating how the structural properties of a system determine
-        its stability, symmetry and transitions between dynamical regimes.
-      </p>
-
-      <a href="#archive" class="read-link">Explore research →</a>
-    </article>
-
-    <aside class="side-stories">
-
-      <article class="side-story">
-        <span class="mono">01 / Graph Dynamics</span>
-        <h3>Symmetry breaking in networks with memory</h3>
-        <p>How spectral properties and graph geometry shape collective dynamics.</p>
-      </article>
-
-      <article class="side-story">
-        <span class="mono">02 / Computational Cognition</span>
-        <h3>Memory, competition and persistent configurations</h3>
-        <p>A dynamical approach to the emergence and persistence of cognitive states.</p>
-      </article>
-
-      <article class="side-story">
-        <span class="mono">03 / Mathematical Foundations</span>
-        <h3>Relations, transformations and emergent structure</h3>
-        <p>Exploring mathematical foundations of complex relational phenomena.</p>
-      </article>
-
-    </aside>
-  </section>
-
-  <section class="section" id="archive">
-
-    <div class="section-heading">
-      <h2>Latest explorations</h2>
-      <a href="#archive" class="mono">Research archive →</a>
-    </div>
-
-    <div class="article-grid">
-
-      <article class="article-card">
-        <span class="mono">Graph Theory / 2026</span>
-        <h3>Memory-driven transitions in graph systems</h3>
-        <p>Investigating the relationship between graph spectra, symmetry and abrupt dynamical transitions.</p>
-      </article>
-
-      <article class="article-card">
-        <span class="mono">Cognitive Dynamics / 2026</span>
-        <h3>Slow-fast interactions and memory persistence</h3>
-        <p>A mathematical model of competing processes coupled through adaptive memory.</p>
-      </article>
-
-      <article class="article-card">
-        <span class="mono">Nonlinear Systems / 2026</span>
-        <h3>Stability, bifurcations and symmetry</h3>
-        <p>Analyzing the geometric conditions that govern loss of stability.</p>
-      </article>
-
-      <article class="article-card">
-        <span class="mono">Semantic Modeling / 2026</span>
-        <h3>Nonlinear inference in semantic spaces</h3>
-        <p>Exploring conceptual emergence in high-dimensional vector spaces.</p>
-      </article>
-
-      <article class="article-card">
-        <span class="mono">Theoretical Research / 2026</span>
-        <h3>Relational foundations of cognition</h3>
-        <p>A theoretical investigation into relation, transformation and emergent organization.</p>
-      </article>
-
-      <article class="article-card">
-        <span class="mono">Computational Methods / 2026</span>
-        <h3>Geometry as a language of complex phenomena</h3>
-        <p>Mathematical tools for describing structural organization and dynamical change.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <section class="section">
-
-    <div class="section-heading">
-      <h2>Research domains</h2>
-      <span class="mono muted">Areas of investigation</span>
-    </div>
-
-    <div class="domain-grid">
-
-      <article class="domain" id="mathematics">
-        <div class="domain-number mono">01</div>
-        <h3>Mathematics</h3>
-        <p>Nonlinear systems, dynamical stability, bifurcation theory and mathematical structures.</p>
-      </article>
-
-      <article class="domain" id="cognition">
-        <div class="domain-number mono">02</div>
-        <h3>Cognition</h3>
-        <p>Computational models of cognition, memory, emergence and persistent configurations.</p>
-      </article>
-
-      <article class="domain" id="complex-systems">
-        <div class="domain-number mono">03</div>
-        <h3>Complex Systems</h3>
-        <p>Networks, symmetry, collective behavior and adaptive dynamical processes.</p>
-      </article>
-
-      <article class="domain" id="computational-science">
-        <div class="domain-number mono">04</div>
-        <h3>Computational Science</h3>
-        <p>Numerical experiments, simulation, algorithmic modeling and computational methods.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <section class="observatory">
-
-    <div class="section-heading">
-      <h2>Computational observatory</h2>
-      <span class="mono muted">Interactive experiment / 001</span>
-    </div>
-
-    <div class="observatory-layout">
-
-      <div class="observatory-copy">
-        <span class="mono" style="color:var(--blue)">Dynamical systems / Phase space</span>
-
-        <h3>Observing the structure of motion</h3>
-
-        <p>
-          Explore a computational particle field. Adjust its coupling
-          parameter and observe how the geometry of the system changes.
-          This is an illustrative experiment, not an empirical result.
-        </p>
-
-        <div class="observatory-data">
-          <div class="data-item">
-            <span class="mono">System</span>
-            <strong>PARTICLE FIELD</strong>
-          </div>
-          <div class="data-item">
-            <span class="mono">Domain</span>
-            <strong>2D SPACE</strong>
-          </div>
-          <div class="data-item">
-            <span class="mono">Method</span>
-            <strong>NUMERICAL</strong>
-          </div>
+  <main>
+    <section class="hero" id="inicio">
+      <picture class="hero-art">
+        <source media="(max-width: 760px)" srcset="matubit.png">
+        <img src="matubit4k.png" alt="" fetchpriority="high">
+      </picture>
+      <div class="hero-content">
+        <div class="eyebrow mono">Mathematics · Computation · Emergence</div>
+        <h1>Comprender lo complejo.<br><span>Explorar lo que emerge.</span></h1>
+        <p class="hero-copy">Un laboratorio independiente dedicado a investigar las estructuras matemáticas, los procesos cognitivos y la dinámica de los sistemas complejos.</p>
+        <div class="hero-actions">
+          <a class="button" href="#investigacion">Explorar investigación <span>↘</span></a>
+          <a class="text-link" href="#enfoque">Conocer el laboratorio <span>↗</span></a>
         </div>
       </div>
+      <div class="hero-index mono">MATUBIT / 2026 — 001</div>
+      <div class="scroll-cue" aria-hidden="true"></div>
+    </section>
 
-      <div>
-        <div class="lab-panel">
-          <div class="lab-label mono">LIVE COMPUTATIONAL FIELD</div>
-          <canvas id="labCanvas" aria-label="Interactive particle field simulation"></canvas>
-          <div class="lab-coordinates mono">x(t) · y(t) · coupling</div>
+    <div class="intro-strip">
+      <div class="wrap strip-inner mono">
+        <span>Laboratorio de investigación científica y computacional</span>
+        <span>Modelado · Simulación · Teoría</span>
+      </div>
+    </div>
+
+    <section class="section" id="investigacion">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker mono">01 / Investigación</div>
+            <h2>Exploraciones<br>en curso.</h2>
+          </div>
+          <p class="section-intro">Investigación teórica y computacional sobre cómo las relaciones, la geometría y las reglas de interacción dan lugar a organización, estabilidad y transformación.</p>
         </div>
 
-        <div class="lab-controls">
-          <label for="coupling">COUPLING</label>
-          <input id="coupling" type="range" min="0" max="100" value="45">
-          <span id="couplingValue">0.45</span>
-          <button id="pauseButton" type="button">PAUSE</button>
+        <div class="research-grid">
+          <article class="research-card reveal">
+            <div class="card-top mono"><span>Graph dynamics / Networks</span><span class="card-index">01</span></div>
+            <h3>Simetría y transiciones en redes con memoria</h3>
+            <p>Estudio de redes dinámicas donde la estructura espectral y la simetría del grafo condicionan la ruptura de estados colectivos y la abruptidad de las transiciones.</p>
+            <div style="margin-top:24px"><span class="status active">Investigación avanzada</span></div><i class="card-orb"></i>
+          </article>
+          <article class="research-card reveal">
+            <div class="card-top mono"><span>Computational cognition / Memory</span><span class="card-index">02</span></div>
+            <h3>Memoria lenta y persistencia de configuraciones</h3>
+            <p>Modelado de procesos equivalentes acoplados mediante memoria adaptativa: competencia, coactivación, estabilidad y pérdida de simetría.</p>
+            <div style="margin-top:24px"><span class="status active">Modelado y análisis</span></div><i class="card-orb"></i>
+          </article>
+          <article class="research-card reveal">
+            <div class="card-top mono"><span>Theoretical framework / MSRT</span><span class="card-index">03</span></div>
+            <h3>Relación, transformación y emergencia</h3>
+            <p>Desarrollo de un marco ontológico en el que relación y transformación se consideran dimensiones constitutivas, y la estructura aparece como estabilización emergente.</p>
+            <div style="margin-top:24px"><span class="status">Marco teórico en desarrollo</span></div><i class="card-orb"></i>
+          </article>
+          <article class="research-card reveal">
+            <div class="card-top mono"><span>Semantic computation / AI</span><span class="card-index">04</span></div>
+            <h3>Inferencia semántica no lineal</h3>
+            <p>Exploración de arquitecturas computacionales para estudiar la emergencia de conceptos y asociaciones en espacios vectoriales de alta dimensión.</p>
+            <div style="margin-top:24px"><span class="status">Prototipo experimental</span></div><i class="card-orb"></i>
+          </article>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container">
-
-    <div class="footer-main">
-      <div>
-        <div class="footer-brand">MATUBIT</div>
-        <div class="mono muted">Independent Scientific Research</div>
+    <section class="section domains" id="areas">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker mono">02 / Áreas de trabajo</div>
+            <h2>Un territorio<br>interconectado.</h2>
+          </div>
+          <p class="section-intro">Las áreas no funcionan como compartimentos aislados: se conectan a través de problemas comunes, herramientas matemáticas y modelos computacionales.</p>
+        </div>
+        <div class="domain-list reveal">
+          <article class="domain"><div class="mono">01 / Foundations</div><h3>Matemáticas</h3><p>Sistemas dinámicos, teoría de bifurcaciones, geometría, álgebra y estructuras discretas.</p></article>
+          <article class="domain"><div class="mono">02 / Mind</div><h3>Cognición</h3><p>Dinámica cognitiva, memoria, emergencia de estados y organización de procesos.</p></article>
+          <article class="domain"><div class="mono">03 / Systems</div><h3>Sistemas complejos</h3><p>Redes, simetría, autoorganización, interacciones y comportamiento colectivo.</p></article>
+          <article class="domain"><div class="mono">04 / Methods</div><h3>Ciencia computacional</h3><p>Simulación, análisis numérico, experimentación computacional y desarrollo algorítmico.</p></article>
+        </div>
       </div>
+    </section>
 
-      <p class="footer-note">
-        A space for mathematical exploration, computational experimentation
-        and theoretical research into complex phenomena.
-      </p>
+    <section class="statement" id="enfoque">
+      <div class="wrap statement-inner reveal">
+        <div class="statement-mark mono">03 / Enfoque</div>
+        <div>
+          <blockquote>La complejidad no se entiende aislando las partes, sino estudiando <em>las relaciones que las transforman</em> y las configuraciones que emergen de ellas.</blockquote>
+          <p class="statement-note">MATUBIT es un espacio de investigación independiente. Su trabajo combina formulación matemática, construcción de modelos, simulación y análisis teórico. Los proyectos se presentan distinguiendo resultados establecidos, desarrollos en curso y propuestas exploratorias.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="wrap contact-inner">
+        <div>
+          <div class="kicker mono">04 / Conexión</div>
+          <h2>Ideas en movimiento.</h2>
+          <p>Investigación independiente · Ciencia computacional · Sistemas complejos</p>
+        </div>
+        <a class="button" href="https://github.com/paradigmax05-dev/matubit" target="_blank" rel="noopener noreferrer">Ver repositorio <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span class="mono">© MATUBIT 2026 — Independent Research Laboratory</span>
+      <span class="mono">Mathematics · Computation · Emergence</span>
     </div>
+  </footer>
 
-    <div class="footer-bottom mono">
-      <span>© MATUBIT 2026</span>
-      <span>Mathematics · Computation · Emergence</span>
-    </div>
-
-  </div>
-</footer>
-
-<script>
-/* PARTICLE FIELD ENGINE */
-
-function createParticleField(canvasId, options = {}) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return null;
-
-  const ctx = canvas.getContext("2d");
-  const count = options.count || 110;
-  const particles = [];
-
-  let width = 0;
-  let height = 0;
-  let animationId = null;
-  let running = true;
-  let coupling = options.coupling || 0.45;
-  let time = 0;
-
-  function resize() {
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    width = rect.width;
-    height = rect.height;
-
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function init() {
-    particles.length = 0;
-
-    for (let i = 0; i < count; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = Math.sqrt(Math.random());
-
-      particles.push({
-        x: width / 2 + Math.cos(angle) * radius * width * .45,
-        y: height / 2 + Math.sin(angle) * radius * height * .42,
-        phase: Math.random() * Math.PI * 2,
-        speed: .3 + Math.random() * .6,
-        size: .6 + Math.random() * 1.2
-      });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
-
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const influence = coupling * .75;
-
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-
-      const angle = p.phase + time * p.speed * .3;
-      const wave = Math.sin(angle + coupling * 4);
-
-      const targetX = centerX +
-        Math.cos(angle) * width * (.12 + influence * .31) +
-        Math.sin(time * .3 + p.phase) * width * .07;
-
-      const targetY = centerY +
-        Math.sin(angle * 1.5) * height * (.12 + influence * .30) +
-        Math.cos(time * .25 + p.phase) * height * .08;
-
-      p.x += (targetX - p.x) * .012;
-      p.y += (targetY - p.y) * .012;
-
-      for (let j = i + 1; j < particles.length; j++) {
-        const q = particles[j];
-        const dx = p.x - q.x;
-        const dy = p.y - q.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 65) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(99,190,207,${(1 - distance / 65) * .19})`;
-          ctx.lineWidth = .6;
-          ctx.stroke();
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.textContent = open ? 'CLOSE −' : 'MENU +';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = 'MENU +';
+    }));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
-      }
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size + Math.abs(wave) * .35, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(117,205,216,.85)";
-      ctx.fill();
-    }
-
-    time += .012;
-  }
-
-  function animate() {
-    if (!running) return;
-    draw();
-    animationId = requestAnimationFrame(animate);
-  }
-
-  function start() {
-    if (running) return;
-    running = true;
-    animate();
-  }
-
-  function pause() {
-    running = false;
-    if (animationId) cancelAnimationFrame(animationId);
-  }
-
-  function setCoupling(value) {
-    coupling = Math.max(0, Math.min(1, value));
-  }
-
-  resize();
-  init();
-  animate();
-
-  window.addEventListener("resize", () => {
-    resize();
-    init();
-  });
-
-  return { pause, start, setCoupling };
-}
-
-/* INITIALIZE VISUALIZATIONS */
-
-const heroField = createParticleField("heroCanvas", {
-  count: 135,
-  coupling: .65
-});
-
-const labField = createParticleField("labCanvas", {
-  count: 95,
-  coupling: .45
-});
-
-/* EXPERIMENT CONTROLS */
-
-const slider = document.getElementById("coupling");
-const valueLabel = document.getElementById("couplingValue");
-const pauseButton = document.getElementById("pauseButton");
-
-slider.addEventListener("input", () => {
-  const value = Number(slider.value) / 100;
-  valueLabel.textContent = value.toFixed(2);
-  labField.setCoupling(value);
-});
-
-let paused = false;
-
-pauseButton.addEventListener("click", () => {
-  paused = !paused;
-
-  if (paused) {
-    labField.pause();
-    pauseButton.textContent = "RESUME";
-  } else {
-    labField.start();
-    pauseButton.textContent = "PAUSE";
-  }
-});
-
-/* REDUCED MOTION ACCESSIBILITY */
-
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  heroField.pause();
-  labField.pause();
-  pauseButton.textContent = "RESUME";
-}
-</script>
-
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
