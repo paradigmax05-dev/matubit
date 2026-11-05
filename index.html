@@ -1,126 +1,231 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#071522">
-<title>Matías Olivares Salazar — MATUBIT</title>
-<meta name="description" content="Investigación independiente en neurociencia computacional, modelización matemática y sistemas complejos.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matías Olivares Salazar | MATUBIT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+
 <style>
-:root{
- --paper:#f5f7f8;--ink:#101b27;--muted:#64717e;--line:#d9e0e5;
- --blue:#1766a6;--cyan:#29b8cf;--violet:#7657c8;--night:#071522;
- --serif:"Newsreader",Georgia,serif;--sans:"DM Sans",Arial,sans-serif;--mono:"DM Mono",monospace;
+:root {
+  --fondo: #f7f8fa;
+  --texto: #172536;
+  --azul: #1766a6;
+  --cian: #29b8cf;
+  --violeta: #7657c8;
+  --linea: #dce2e8;
 }
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}.wrap{width:min(1280px,calc(100% - 72px));margin:auto}
-.micro{font:10px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
-.topline{height:38px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:var(--muted);font:10px var(--mono);letter-spacing:.06em;text-transform:uppercase}
-.masthead{display:flex;align-items:center;justify-content:space-between;padding:28px 0 24px}
-.wordmark{font:500 clamp(54px,7vw,88px)/.78 var(--serif);letter-spacing:-.055em;color:var(--night)}
-.wordmark span{color:var(--cyan)}
-.mast-note{max-width:310px;text-align:right;color:var(--muted);font-size:13px;line-height:1.55}
-nav{display:flex;gap:30px;align-items:center;overflow-x:auto;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-nav a{font-size:13px;white-space:nowrap;color:#3e4b57}nav a:hover{color:var(--blue)}
-nav .nav-end{margin-left:auto;color:var(--violet);font:10px var(--mono);white-space:nowrap}
-.kicker{display:flex;justify-content:space-between;gap:20px;padding:22px 0 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
-.lead{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(270px,1fr);gap:42px;padding:32px 0 48px;border-bottom:1px solid var(--line)}
-.visual{background:var(--night);overflow:hidden;position:relative;aspect-ratio:16/7.4}
-.visual img{width:100%;height:100%;object-fit:cover;display:block}
-.lead-meta{display:flex;gap:12px;margin:20px 0 12px}
-h1,h2,h3,p{margin-top:0}
-h1{font:400 clamp(40px,5vw,66px)/.98 var(--serif);letter-spacing:-.035em;margin-bottom:15px;max-width:850px}
-.lead-copy{font-size:16px;line-height:1.7;color:#52616e;max-width:720px;margin:0}
-.profile-link{display:inline-block;margin-top:19px;padding-bottom:4px;border-bottom:1px solid var(--blue);font-size:13px;color:var(--blue)}
-.side{padding-top:5px}.side-item{padding:0 0 22px;margin-bottom:22px;border-bottom:1px solid var(--line)}.side-item:last-child{border:0}
-.side-item h3{font:400 29px/1.05 var(--serif);margin:9px 0;color:var(--ink)}
-.side-item p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
-.section{padding:45px 0 52px;border-bottom:1px solid var(--line)}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:25px}
-.section-head h2{font:400 42px/1 var(--serif);letter-spacing:-.025em;margin:0}
-.section-head span,.section-head a{font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--blue)}
-.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.story{border-top:1px solid var(--line);padding-top:14px}
-.story h3{font:400 29px/1.06 var(--serif);margin:12px 0 10px}
-.story p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}
-.story .micro{color:var(--violet)}
-.domains{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-.domain{border-top:2px solid var(--ink);padding-top:13px}
-.domain .num{font:10px var(--mono);color:var(--cyan);margin-bottom:19px}
-.domain h3{font:400 27px/1.05 var(--serif);margin:0 0 9px}
-.domain p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
-.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px;align-items:start}
-.about h2{font:400 clamp(36px,4vw,52px)/.98 var(--serif);margin:12px 0}
-.about p{font-size:15px;line-height:1.8;color:#52616e;max-width:720px}
-.about strong{color:var(--ink);font-weight:600}
-footer{padding:30px 0 38px}.foot-top{display:flex;justify-content:space-between;gap:30px;align-items:end}
-.foot-name{font:400 42px var(--serif);letter-spacing:-.03em}.foot-copy{font-size:12px;line-height:1.65;color:var(--muted);max-width:330px}
-.foot-bottom{border-top:1px solid var(--line);margin-top:25px;padding-top:14px;display:flex;justify-content:space-between;color:var(--muted);font:10px var(--mono);letter-spacing:.05em}
-@media(max-width:850px){.wrap{width:calc(100% - 42px)}.lead{grid-template-columns:1fr;gap:25px}.side{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.side-item{margin:0}.domains{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr;gap:15px}}
-@media(max-width:560px){.wrap{width:calc(100% - 32px)}.topline{font-size:8px}.masthead{align-items:flex-start;gap:14px;flex-direction:column}.mast-note{text-align:left}.wordmark{font-size:62px}nav{gap:21px}.nav-end{display:none}.kicker{font-size:11px;flex-direction:column;gap:6px}.lead{padding-top:22px}.visual{aspect-ratio:4/3}.side{grid-template-columns:1fr}.story-grid,.domains{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column;gap:8px}.section-head h2{font-size:37px}.foot-top,.foot-bottom{align-items:flex-start;flex-direction:column;gap:12px}}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.contenedor {
+  max-width: 1320px;
+  width: 92%;
+  margin: auto;
+}
+
+/* CABECERA */
+
+.cabecera {
+  border-bottom: 1px solid var(--linea);
+}
+
+.marca {
+  padding: 30px 0 24px;
+  text-align: center;
+}
+
+.logo {
+  font-family: 'Newsreader', serif;
+  font-size: 72px;
+  font-weight: 500;
+  letter-spacing: -5px;
+  color: #10283e;
+}
+
+.logo span {
+  color: var(--cian);
+}
+
+/* NAVEGACIÓN */
+
+.navegacion {
+  display: flex;
+  justify-content: center;
+  gap: 42px;
+  border-top: 1px solid var(--linea);
+  padding: 17px 0;
+}
+
+.navegacion a {
+  text-decoration: none;
+  color: var(--texto);
+  font-size: 13px;
+  transition: color .2s;
+}
+
+.navegacion a:hover {
+  color: var(--azul);
+}
+
+/* PORTADA */
+
+.portada {
+  padding-top: 28px;
+}
+
+.etiqueta {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--azul);
+  margin-bottom: 18px;
+}
+
+.imagen-portada {
+  width: 100%;
+  overflow: hidden;
+  background: #071522;
+}
+
+.imagen-portada img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* PRESENTACIÓN */
+
+.presentacion {
+  max-width: 1050px;
+  margin: 36px auto 75px;
+  text-align: center;
+}
+
+.nombre {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -2px;
+  margin: 0 0 17px;
+}
+
+.profesion {
+  color: var(--azul);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.descripcion {
+  max-width: 790px;
+  margin: auto;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #536273;
+}
+
+/* MÓVILES */
+
+@media (max-width: 650px) {
+  .logo {
+    font-size: 58px;
+  }
+
+  .navegacion {
+    gap: 20px;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .navegacion a {
+    white-space: nowrap;
+  }
+
+  .presentacion {
+    margin-top: 28px;
+  }
+
+  .descripcion {
+    font-size: 15px;
+  }
+}
 </style>
 </head>
+
 <body>
-<header>
- <div class="wrap">
-  <div class="topline"><span>MATUBIT · Espacio personal de investigación</span><span>Neurociencia · Matemáticas · Sistemas complejos</span></div>
-  <div class="masthead">
-   <a class="wordmark" href="#">MATU<span>BIT</span></a>
-   <div class="mast-note">Investigación independiente y exploración de ideas en la intersección entre mente, matemática y computación.</div>
+
+<header class="cabecera">
+  <div class="contenedor">
+
+    <div class="marca">
+      <div class="logo">MATU<span>BIT</span></div>
+    </div>
+
+    <nav class="navegacion">
+      <a href="#inicio">Inicio</a>
+      <a href="#investigacion">Investigación</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#perfil">Sobre mí</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
   </div>
-  <nav>
-   <a href="#perfil">Perfil</a><a href="#investigacion">Investigación</a><a href="#areas">Áreas de trabajo</a><a href="#proyectos">Proyectos</a><a href="#contacto">Contacto</a>
-   <span class="nav-end">INDEPENDENT RESEARCH</span>
-  </nav>
- </div>
 </header>
-<main class="wrap">
- <div class="kicker"><span>Un espacio para investigar, modelar y construir ideas</span><span class="micro">Matías Olivares Salazar / 2026</span></div>
- <section class="lead" id="perfil">
-  <article>
-   <div class="micro">Investigador · Psicólogo · Desarrollador</div>
-   <div class="visual"><img src="matubit4k.png" alt="Identidad visual MATUBIT"></div>
-   <div class="lead-meta micro"><span>Neurociencia computacional</span><span>·</span><span>Modelización matemática</span></div>
-   <h1>Matías Olivares Salazar</h1>
-   <p class="lead-copy">Psicólogo y Magíster en Neurociencias. Investigador independiente en neurociencia computacional y modelización matemática; desarrollador de metodologías cognitivas y fundador científico-tecnológico.</p>
-   <a class="profile-link" href="#investigacion">Explorar mi trabajo →</a>
-  </article>
-  <aside class="side">
-   <article class="side-item"><span class="micro">01 / Investigación</span><h3>Comprender la mente desde modelos computacionales</h3><p>Estudio de procesos cognitivos mediante sistemas dinámicos, memoria, interacción y emergencia.</p></article>
-   <article class="side-item"><span class="micro">02 / Matemática</span><h3>La geometría de los sistemas complejos</h3><p>Modelización matemática de estabilidad, simetría, redes y transiciones dinámicas.</p></article>
-   <article class="side-item"><span class="micro">03 / Desarrollo</span><h3>De las ideas a herramientas y métodos</h3><p>Diseño de arquitecturas computacionales y metodologías para explorar y entrenar capacidades cognitivas.</p></article>
-  </aside>
- </section>
- <section class="section" id="investigacion">
-  <div class="section-head"><h2>Investigación y proyectos</h2><span>Selección de líneas de trabajo</span></div>
-  <div class="story-grid" id="proyectos">
-   <article class="story"><span class="micro">01 / Redes y sistemas complejos</span><h3>Memoria y ruptura de simetría en redes</h3><p>Estudio de cómo la estructura espectral y la geometría de los grafos condicionan la estabilidad y las transiciones colectivas.</p></article>
-   <article class="story"><span class="micro">02 / Neurociencia computacional</span><h3>Dinámica lenta-rápida de la memoria</h3><p>Modelos de procesos competitivos acoplados por memoria adaptativa y persistencia de configuraciones cognitivas.</p></article>
-   <article class="story"><span class="micro">03 / Fundamentos teóricos</span><h3>Relación, transformación y mente</h3><p>Exploración de fundamentos relacionales para comprender la organización y transformación de los fenómenos mentales.</p></article>
-   <article class="story"><span class="micro">04 / Inteligencia artificial</span><h3>Inferencia semántica no lineal</h3><p>Arquitecturas para estudiar la emergencia de conceptos en espacios semánticos vectoriales de alta dimensión.</p></article>
-   <article class="story"><span class="micro">05 / Modelización matemática</span><h3>Estabilidad y transiciones abruptas</h3><p>Análisis de condiciones geométricas, espectrales y de simetría que gobiernan cambios de régimen en sistemas dinámicos.</p></article>
-   <article class="story"><span class="micro">06 / Metodologías cognitivas</span><h3>Diseño y desarrollo metodológico</h3><p>Creación de metodologías aplicadas al desarrollo cognitivo, conectando investigación, modelización y experimentación.</p></article>
-  </div>
- </section>
- <section class="section" id="areas">
-  <div class="section-head"><h2>Áreas de exploración</h2><span>Un trabajo entre disciplinas</span></div>
-  <div class="domains">
-   <article class="domain"><div class="num">01</div><h3>Neurociencia computacional</h3><p>Modelos de cognición, memoria, aprendizaje y dinámica de procesos.</p></article>
-   <article class="domain"><div class="num">02</div><h3>Matemáticas aplicadas</h3><p>Sistemas no lineales, estabilidad, bifurcaciones y estructuras geométricas.</p></article>
-   <article class="domain"><div class="num">03</div><h3>Sistemas complejos</h3><p>Redes, simetría, emergencia, interacción y comportamiento colectivo.</p></article>
-   <article class="domain"><div class="num">04</div><h3>Computación e IA</h3><p>Simulación, inferencia, arquitecturas y experimentación computacional.</p></article>
-  </div>
- </section>
- <section class="section about">
-  <div><span class="micro">Sobre este espacio</span><h2>Investigar también es construir.</h2></div>
-  <div><p><strong>MATUBIT</strong> es mi espacio personal de investigación y desarrollo. Aquí convergen preguntas, modelos matemáticos, experimentos computacionales y proyectos que buscan conectar distintas formas de comprender sistemas complejos.</p><p>Es un trabajo independiente, interdisciplinario y en evolución: un lugar para documentar lo que estoy investigando, compartir desarrollos y explorar nuevas posibilidades.</p></div>
- </section>
+
+<main class="contenedor" id="inicio">
+
+  <section class="portada">
+
+    <div class="etiqueta">
+      Investigación independiente · Ciencia y tecnología
+    </div>
+
+    <div class="imagen-portada">
+      <picture>
+        <source
+          media="(max-width: 650px)"
+          srcset="matubit.png">
+        <img
+          src="matubit4k.png"
+          alt="MATUBIT — Investigación y exploración científica">
+      </picture>
+    </div>
+
+    <div class="presentacion" id="perfil">
+
+      <h1 class="nombre">
+        Matías Olivares Salazar
+      </h1>
+
+      <div class="profesion">
+        Psicólogo · Magíster en Neurociencias
+      </div>
+
+      <p class="descripcion">
+        Investigador independiente en neurociencia computacional
+        y modelización matemática. Desarrollador de metodologías
+        cognitivas y fundador científico-tecnológico.
+      </p>
+
+    </div>
+
+  </section>
+
 </main>
-<footer id="contacto"><div class="wrap">
- <div class="foot-top"><div><div class="foot-name">Matías Olivares Salazar</div><div class="micro">MATUBIT · Investigación independiente</div></div><p class="foot-copy">Neurociencia computacional, modelización matemática y desarrollo de metodologías cognitivas.</p></div>
- <div class="foot-bottom"><span>© 2026 MATUBIT</span><span>Mathematics · Mind · Computation</span></div>
-</div></footer>
-</body></html>
+
+</body>
+</html>
