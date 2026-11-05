@@ -2,520 +2,478 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MATUBIT — Computational Research</title>
-  <meta name="description" content="Independent research in mathematics, cognition and complex systems.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --paper: #ffffff;
-      --ink: #17191d;
-      --muted: #777c83;
-      --line: #e5e6e8;
-      --blue: #315d91;
-      --cyan: #63b7c5;
-      --dark: #111820;
-      --soft: #f6f7f7;
-      --serif: "Instrument Serif", Georgia, serif;
-      --sans: "Source Sans 3", sans-serif;
-      --mono: "IBM Plex Mono", monospace;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1240px, calc(100% - 64px));
-      margin: auto;
-    }
-
-    .mono {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .muted { color: var(--muted); }
-
-    /* HEADER */
-
-    header {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topline {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 13px 0;
-      color: var(--muted);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .masthead {
-      padding: 28px 0 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .brand {
-      font-family: var(--serif);
-      font-size: clamp(58px, 8vw, 100px);
-      line-height: .78;
-      letter-spacing: -3px;
-    }
-
-    .brand span {
-      color: var(--blue);
-    }
-
-    .brand-description {
-      max-width: 220px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-      padding-bottom: 4px;
-    }
-
-    nav {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-      border-top: 1px solid var(--line);
-      padding: 15px 0;
-      overflow-x: auto;
-    }
-
-    nav a {
-      font-size: 13px;
-      color: #555b62;
-      white-space: nowrap;
-      transition: color .2s;
-    }
-
-    nav a:hover { color: var(--blue); }
-
-    .nav-status {
-      margin-left: auto;
-      color: var(--blue);
-      white-space: nowrap;
-    }
-
-    /* INTRO */
-
-    .intro {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 35px 0 22px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .intro p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* FEATURED STORIES */
-
-    .featured {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 42px;
-      padding: 38px 0 55px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .section-label {
-      color: var(--blue);
-      margin-bottom: 20px;
-    }
-
-    .hero-visual {
-      height: 340px;
-      background: var(--dark);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-visual svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .visual-caption {
-      position: absolute;
-      left: 20px;
-      bottom: 17px;
-      color: #b8c5ce;
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: .08em;
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 15px;
-      margin: 22px 0 12px;
-      color: var(--blue);
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(38px, 4.5vw, 57px);
-      font-weight: 400;
-      line-height: .99;
-      letter-spacing: -.7px;
-      max-width: 760px;
-      margin: 0 0 16px;
-    }
-
-    .hero-description {
-      font-size: 16px;
-      line-height: 1.65;
-      color: #62676e;
-      max-width: 650px;
-      margin: 0;
-    }
-
-    .read-link {
-      display: inline-block;
-      margin-top: 20px;
-      color: var(--blue);
-      font-size: 13px;
-      border-bottom: 1px solid var(--blue);
-      padding-bottom: 3px;
-    }
-
-    .side-stories {
-      padding-top: 40px;
-    }
-
-    .side-story {
-      padding: 0 0 23px;
-      margin-bottom: 23px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .side-story:last-child {
-      border-bottom: none;
-    }
-
-    .side-story .mono {
-      color: var(--blue);
-    }
-
-    .side-story h3 {
-      font-family: var(--serif);
-      font-size: 27px;
-      line-height: 1.05;
-      font-weight: 400;
-      margin: 10px 0;
-    }
-
-    .side-story p {
-      font-size: 13px;
-      line-height: 1.55;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    /* LATEST */
-
-    .latest {
-      padding: 48px 0 55px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 28px;
-    }
-
-    .section-heading h2 {
-      font-family: var(--serif);
-      font-size: 39px;
-      font-weight: 400;
-      margin: 0;
-    }
-
-    .section-heading a {
-      color: var(--blue);
-      font-size: 12px;
-    }
-
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .article-card {
-      border-top: 1px solid var(--line);
-      padding-top: 15px;
-    }
-
-    .article-card .mono {
-      color: var(--blue);
-    }
-
-    .article-card h3 {
-      font-family: var(--serif);
-      font-size: 29px;
-      line-height: 1.05;
-      font-weight: 400;
-      margin: 13px 0 10px;
-    }
-
-    .article-card p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    /* RESEARCH DOMAINS */
-
-    .domains {
-      padding: 48px 0 58px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .domain-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-      margin-top: 28px;
-    }
-
-    .domain {
-      border-top: 2px solid var(--ink);
-      padding-top: 14px;
-    }
-
-    .domain-number {
-      color: var(--blue);
-      margin-bottom: 20px;
-    }
-
-    .domain h3 {
-      font-family: var(--serif);
-      font-size: 26px;
-      font-weight: 400;
-      margin: 0 0 9px;
-    }
-
-    .domain p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    /* COMPUTATIONAL OBSERVATORY */
-
-    .observatory {
-      padding: 55px 0 60px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .observatory-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.35fr;
-      gap: 45px;
-      align-items: center;
-      margin-top: 25px;
-    }
-
-    .observatory-copy h3 {
-      font-family: var(--serif);
-      font-size: 42px;
-      font-weight: 400;
-      line-height: 1;
-      margin: 0 0 17px;
-    }
-
-    .observatory-copy p {
-      color: #686e75;
-      font-size: 15px;
-      line-height: 1.7;
-      max-width: 420px;
-    }
-
-    .observatory-data {
-      margin-top: 25px;
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-
-    .data-item span {
-      display: block;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .data-item strong {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--blue);
-    }
-
-    .observatory-visual {
-      min-height: 290px;
-      background: var(--dark);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .observatory-visual svg {
-      display: block;
-      width: 100%;
-      height: 290px;
-    }
-
-    .observatory-label {
-      position: absolute;
-      top: 17px;
-      left: 19px;
-      color: #a9bac5;
-    }
-
-    .observatory-coordinates {
-      position: absolute;
-      bottom: 16px;
-      right: 18px;
-      color: #a9bac5;
-      text-align: right;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 35px 0 45px;
-    }
-
-    .footer-main {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 30px;
-    }
-
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 43px;
-      letter-spacing: -1px;
-    }
-
-    .footer-note {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-      max-width: 300px;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--line);
-      margin-top: 30px;
-      padding-top: 15px;
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-    }
-
-    @media (max-width: 800px) {
-      .container { width: min(100% - 36px, 600px); }
-
-      .masthead {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 18px;
-      }
-
-      .brand { font-size: 76px; }
-
-      nav { gap: 22px; }
-
-      .nav-status { display: none; }
-
-      .featured {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .side-stories {
-        padding-top: 10px;
-      }
-
-      .hero-visual { height: 270px; }
-
-      .article-grid { grid-template-columns: 1fr 1fr; }
-
-      .domain-grid { grid-template-columns: 1fr 1fr; }
-
-      .observatory-layout {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .topline { font-size: 9px; }
-
-      .intro {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .article-grid,
-      .domain-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-visual { height: 230px; }
-
-      .footer-main {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10151b">
+<title>MATUBIT — Independent Research Laboratory</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #f8f8f5;
+  --ink: #202329;
+  --muted: #777d85;
+  --line: #dedfdd;
+  --blue: #315d91;
+  --cyan: #66c4d1;
+  --dark: #101820;
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Source Sans 3", sans-serif;
+  --mono: "DM Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: min(1240px, calc(100% - 64px));
+  margin: auto;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.muted { color: var(--muted); }
+
+header { border-bottom: 1px solid var(--line); }
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 0;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 30px 0 25px;
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: clamp(65px, 9vw, 108px);
+  line-height: .76;
+  letter-spacing: -3px;
+}
+
+.brand span { color: var(--blue); }
+
+.brand-note {
+  max-width: 250px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 29px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+nav a {
+  font-size: 13px;
+  white-space: nowrap;
+  color: #555b62;
+}
+
+nav a:hover { color: var(--blue); }
+
+.nav-status {
+  margin-left: auto;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.intro p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: 1.85fr 1fr;
+  gap: 42px;
+  padding: 38px 0 55px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-label { color: var(--blue); margin-bottom: 18px; }
+
+.hero-visual {
+  height: 345px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.visual-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  color: #a8bdc7;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .07em;
+  pointer-events: none;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 13px;
+  margin: 21px 0 12px;
+  color: var(--blue);
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(39px, 4.5vw, 59px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.5px;
+  margin: 0 0 17px;
+  max-width: 760px;
+}
+
+.hero-description {
+  color: #626971;
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 640px;
+  margin: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--blue);
+  font-size: 13px;
+  border-bottom: 1px solid var(--blue);
+  padding-bottom: 3px;
+}
+
+.side-stories { padding-top: 39px; }
+
+.side-story {
+  padding-bottom: 23px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.side-story:last-child { border: 0; }
+
+.side-story h3 {
+  font-family: var(--serif);
+  font-size: 29px;
+  line-height: 1.04;
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.side-story p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.section {
+  padding: 48px 0 55px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
+.section-heading h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 41px;
+  margin: 0;
+}
+
+.section-heading a {
+  color: var(--blue);
+  font-size: 12px;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.article-card {
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+}
+
+.article-card .mono { color: var(--blue); }
+
+.article-card h3 {
+  font-family: var(--serif);
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 12px 0 10px;
+}
+
+.article-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.domain {
+  border-top: 2px solid var(--ink);
+  padding-top: 14px;
+}
+
+.domain-number {
+  color: var(--blue);
+  margin-bottom: 18px;
+}
+
+.domain h3 {
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  margin: 0 0 9px;
+}
+
+.domain p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* OBSERVATORY */
+
+.observatory {
+  padding: 55px 0 60px;
+  border-bottom: 1px solid var(--line);
+}
+
+.observatory-layout {
+  display: grid;
+  grid-template-columns: .85fr 1.35fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.observatory-copy h3 {
+  font-family: var(--serif);
+  font-size: 43px;
+  line-height: .98;
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.observatory-copy p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #686e75;
+}
+
+.observatory-data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.data-item span {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.data-item strong {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 400;
+}
+
+.lab-panel {
+  background: var(--dark);
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.lab-panel canvas {
+  display: block;
+  width: 100%;
+  height: 320px;
+}
+
+.lab-label {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  color: #a8bdc7;
+  pointer-events: none;
+}
+
+.lab-coordinates {
+  position: absolute;
+  right: 17px;
+  bottom: 15px;
+  color: #a8bdc7;
+  pointer-events: none;
+}
+
+.lab-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.lab-controls input {
+  flex: 1;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.lab-controls button {
+  background: none;
+  border: 1px solid var(--line);
+  padding: 7px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+footer { padding: 35px 0 42px; }
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 45px;
+}
+
+.footer-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 310px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 15px;
+  color: var(--muted);
+}
+
+@media(max-width: 800px) {
+  .container { width: calc(100% - 38px); }
+
+  .masthead {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .featured { grid-template-columns: 1fr; }
+
+  .side-stories { padding-top: 5px; }
+
+  .article-grid { grid-template-columns: 1fr 1fr; }
+
+  .domain-grid { grid-template-columns: 1fr 1fr; }
+
+  .observatory-layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 520px) {
+  .topline { font-size: 8px; }
+
+  .intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .article-grid, .domain-grid { grid-template-columns: 1fr; }
+
+  .hero-visual { height: 245px; }
+
+  .footer-main, .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lab-panel, .lab-panel canvas { min-height: 250px; height: 250px; }
+}
+</style>
 </head>
 
 <body>
@@ -530,8 +488,7 @@
 
     <div class="masthead">
       <a href="#" class="brand">MATU<span>BIT</span></a>
-
-      <div class="brand-description">
+      <div class="brand-note">
         Exploring the mathematical structures underlying complex phenomena.
       </div>
     </div>
@@ -555,51 +512,14 @@
     <span class="mono muted">Research notes / 2026</span>
   </section>
 
-  <!-- FEATURED RESEARCH -->
-
   <section class="featured">
 
     <article>
       <div class="section-label mono">Featured Research / 001</div>
 
       <div class="hero-visual">
-        <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="glow">
-              <stop offset="0%" stop-color="#63b7c5" stop-opacity=".25"/>
-              <stop offset="100%" stop-color="#63b7c5" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-
-          <circle cx="400" cy="200" r="180" fill="url(#glow)"/>
-
-          <g stroke="#8baab9" stroke-width=".6" opacity=".25">
-            <path d="M70 200 H730"/>
-            <path d="M400 35 V365"/>
-            <path d="M140 90 L660 310"/>
-            <path d="M140 310 L660 90"/>
-          </g>
-
-          <g fill="none" stroke="#63b7c5" stroke-width="1.3" opacity=".9">
-            <path d="M165 210 C190 60 340 80 370 175 S500 315 575 210 S480 70 415 150 S330 300 245 235 S220 125 300 115"/>
-            <path d="M180 220 C210 80 345 95 380 180 S510 300 590 205 S485 65 420 145 S335 285 250 225 S230 135 310 125" opacity=".55"/>
-            <path d="M190 230 C220 100 350 110 390 185 S520 285 605 200 S490 60 425 140 S340 270 255 215 S240 145 320 135" opacity=".3"/>
-          </g>
-
-          <g fill="#d4e7ec">
-            <circle cx="400" cy="180" r="3"/>
-            <circle cx="575" cy="210" r="3"/>
-            <circle cx="245" cy="235" r="2.5"/>
-          </g>
-
-          <g fill="#9ab1bd" font-family="monospace" font-size="9" opacity=".7">
-            <text x="85" y="45">DYNAMIC SYSTEM / PHASE SPACE</text>
-            <text x="85" y="360">MATUBIT RESEARCH SERIES</text>
-            <text x="670" y="360">01 — 26</text>
-          </g>
-        </svg>
-
-        <div class="visual-caption">FIG. 01 — DYNAMIC CONFIGURATION / PHASE SPACE</div>
+        <canvas id="heroCanvas" aria-label="Animated mathematical particle field"></canvas>
+        <div class="visual-caption">FIG. 01 — COMPUTATIONAL FIELD / LIVE SIMULATION</div>
       </div>
 
       <div class="hero-meta mono">
@@ -625,7 +545,7 @@
       <article class="side-story">
         <span class="mono">01 / Graph Dynamics</span>
         <h3>Symmetry breaking in networks with memory</h3>
-        <p>How spectral properties and graph geometry shape the dynamics of collective systems.</p>
+        <p>How spectral properties and graph geometry shape collective dynamics.</p>
       </article>
 
       <article class="side-story">
@@ -637,15 +557,13 @@
       <article class="side-story">
         <span class="mono">03 / Mathematical Foundations</span>
         <h3>Relations, transformations and emergent structure</h3>
-        <p>Exploring the mathematical foundations of complex relational phenomena.</p>
+        <p>Exploring mathematical foundations of complex relational phenomena.</p>
       </article>
 
     </aside>
   </section>
 
-  <!-- LATEST RESEARCH -->
-
-  <section class="latest" id="archive">
+  <section class="section" id="archive">
 
     <div class="section-heading">
       <h2>Latest explorations</h2>
@@ -669,13 +587,13 @@
       <article class="article-card">
         <span class="mono">Nonlinear Systems / 2026</span>
         <h3>Stability, bifurcations and symmetry</h3>
-        <p>Analyzing the geometric conditions that govern the loss of stability in dynamical systems.</p>
+        <p>Analyzing the geometric conditions that govern loss of stability.</p>
       </article>
 
       <article class="article-card">
         <span class="mono">Semantic Modeling / 2026</span>
         <h3>Nonlinear inference in semantic spaces</h3>
-        <p>Exploring conceptual emergence through interactions in high-dimensional vector spaces.</p>
+        <p>Exploring conceptual emergence in high-dimensional vector spaces.</p>
       </article>
 
       <article class="article-card">
@@ -693,9 +611,7 @@
     </div>
   </section>
 
-  <!-- RESEARCH AREAS -->
-
-  <section class="domains">
+  <section class="section">
 
     <div class="section-heading">
       <h2>Research domains</h2>
@@ -713,7 +629,7 @@
       <article class="domain" id="cognition">
         <div class="domain-number mono">02</div>
         <h3>Cognition</h3>
-        <p>Computational models of cognition, memory, emergence and persistent mental configurations.</p>
+        <p>Computational models of cognition, memory, emergence and persistent configurations.</p>
       </article>
 
       <article class="domain" id="complex-systems">
@@ -731,39 +647,35 @@
     </div>
   </section>
 
-  <!-- COMPUTATIONAL OBSERVATORY -->
-
   <section class="observatory">
 
     <div class="section-heading">
       <h2>Computational observatory</h2>
-      <span class="mono muted">Experimental visualization</span>
+      <span class="mono muted">Interactive experiment / 001</span>
     </div>
 
     <div class="observatory-layout">
 
       <div class="observatory-copy">
-        <span class="mono" style="color:var(--blue)">Dynamical systems / 001</span>
+        <span class="mono" style="color:var(--blue)">Dynamical systems / Phase space</span>
 
         <h3>Observing the structure of motion</h3>
 
         <p>
-          A visual exploration of nonlinear dynamics, phase spaces and
-          emergent configurations. Mathematical systems examined through
-          computational experiments.
+          Explore a computational particle field. Adjust its coupling
+          parameter and observe how the geometry of the system changes.
+          This is an illustrative experiment, not an empirical result.
         </p>
 
         <div class="observatory-data">
           <div class="data-item">
             <span class="mono">System</span>
-            <strong>NONLINEAR</strong>
+            <strong>PARTICLE FIELD</strong>
           </div>
-
           <div class="data-item">
             <span class="mono">Domain</span>
-            <strong>PHASE SPACE</strong>
+            <strong>2D SPACE</strong>
           </div>
-
           <div class="data-item">
             <span class="mono">Method</span>
             <strong>NUMERICAL</strong>
@@ -771,40 +683,18 @@
         </div>
       </div>
 
-      <div class="observatory-visual">
+      <div>
+        <div class="lab-panel">
+          <div class="lab-label mono">LIVE COMPUTATIONAL FIELD</div>
+          <canvas id="labCanvas" aria-label="Interactive particle field simulation"></canvas>
+          <div class="lab-coordinates mono">x(t) · y(t) · coupling</div>
+        </div>
 
-        <div class="observatory-label mono">COMPUTATIONAL EXPERIMENT / 001</div>
-
-        <svg id="phase-space" viewBox="0 0 650 290" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="#53616b" stroke-width=".6" opacity=".5">
-            <path d="M30 145 H620"/>
-            <path d="M325 30 V260"/>
-            <path d="M100 40 V250" stroke-dasharray="2 5"/>
-            <path d="M550 40 V250" stroke-dasharray="2 5"/>
-            <path d="M30 75 H620" stroke-dasharray="2 5"/>
-            <path d="M30 215 H620" stroke-dasharray="2 5"/>
-          </g>
-
-          <g id="orbit" fill="none" stroke="#63b7c5" stroke-width="1.2">
-            <path d="M325 145 C380 30 500 50 515 130 C530 210 425 250 350 190 C275 130 170 70 145 145 C120 220 250 260 325 145"/>
-            <path d="M325 145 C370 45 480 60 495 130 C510 200 420 235 355 185 C290 135 190 85 160 145 C135 205 245 245 325 145" opacity=".4"/>
-          </g>
-
-          <g fill="#d9f1f4">
-            <circle cx="325" cy="145" r="3"/>
-            <circle cx="515" cy="130" r="2.5"/>
-          </g>
-
-          <g fill="#9ab1bd" font-family="monospace" font-size="9">
-            <text x="34" y="24">X(t)</text>
-            <text x="590" y="135">X</text>
-            <text x="334" y="38">Y</text>
-            <text x="34" y="274">STATE SPACE / SIMULATED TRAJECTORY</text>
-          </g>
-        </svg>
-
-        <div class="observatory-coordinates mono">
-          x(t) · y(t) · trajectory
+        <div class="lab-controls">
+          <label for="coupling">COUPLING</label>
+          <input id="coupling" type="range" min="0" max="100" value="45">
+          <span id="couplingValue">0.45</span>
+          <button id="pauseButton" type="button">PAUSE</button>
         </div>
       </div>
 
@@ -836,6 +726,182 @@
   </div>
 </footer>
 
+<script>
+/* PARTICLE FIELD ENGINE */
+
+function createParticleField(canvasId, options = {}) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return null;
+
+  const ctx = canvas.getContext("2d");
+  const count = options.count || 110;
+  const particles = [];
+
+  let width = 0;
+  let height = 0;
+  let animationId = null;
+  let running = true;
+  let coupling = options.coupling || 0.45;
+  let time = 0;
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = rect.width;
+    height = rect.height;
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function init() {
+    particles.length = 0;
+
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.sqrt(Math.random());
+
+      particles.push({
+        x: width / 2 + Math.cos(angle) * radius * width * .45,
+        y: height / 2 + Math.sin(angle) * radius * height * .42,
+        phase: Math.random() * Math.PI * 2,
+        speed: .3 + Math.random() * .6,
+        size: .6 + Math.random() * 1.2
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const influence = coupling * .75;
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      const angle = p.phase + time * p.speed * .3;
+      const wave = Math.sin(angle + coupling * 4);
+
+      const targetX = centerX +
+        Math.cos(angle) * width * (.12 + influence * .31) +
+        Math.sin(time * .3 + p.phase) * width * .07;
+
+      const targetY = centerY +
+        Math.sin(angle * 1.5) * height * (.12 + influence * .30) +
+        Math.cos(time * .25 + p.phase) * height * .08;
+
+      p.x += (targetX - p.x) * .012;
+      p.y += (targetY - p.y) * .012;
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 65) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(99,190,207,${(1 - distance / 65) * .19})`;
+          ctx.lineWidth = .6;
+          ctx.stroke();
+        }
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size + Math.abs(wave) * .35, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(117,205,216,.85)";
+      ctx.fill();
+    }
+
+    time += .012;
+  }
+
+  function animate() {
+    if (!running) return;
+    draw();
+    animationId = requestAnimationFrame(animate);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    animate();
+  }
+
+  function pause() {
+    running = false;
+    if (animationId) cancelAnimationFrame(animationId);
+  }
+
+  function setCoupling(value) {
+    coupling = Math.max(0, Math.min(1, value));
+  }
+
+  resize();
+  init();
+  animate();
+
+  window.addEventListener("resize", () => {
+    resize();
+    init();
+  });
+
+  return { pause, start, setCoupling };
+}
+
+/* INITIALIZE VISUALIZATIONS */
+
+const heroField = createParticleField("heroCanvas", {
+  count: 135,
+  coupling: .65
+});
+
+const labField = createParticleField("labCanvas", {
+  count: 95,
+  coupling: .45
+});
+
+/* EXPERIMENT CONTROLS */
+
+const slider = document.getElementById("coupling");
+const valueLabel = document.getElementById("couplingValue");
+const pauseButton = document.getElementById("pauseButton");
+
+slider.addEventListener("input", () => {
+  const value = Number(slider.value) / 100;
+  valueLabel.textContent = value.toFixed(2);
+  labField.setCoupling(value);
+});
+
+let paused = false;
+
+pauseButton.addEventListener("click", () => {
+  paused = !paused;
+
+  if (paused) {
+    labField.pause();
+    pauseButton.textContent = "RESUME";
+  } else {
+    labField.start();
+    pauseButton.textContent = "PAUSE";
+  }
+});
+
+/* REDUCED MOTION ACCESSIBILITY */
+
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  heroField.pause();
+  labField.pause();
+  pauseButton.textContent = "RESUME";
+}
+</script>
+
 </body>
 </html>
-
